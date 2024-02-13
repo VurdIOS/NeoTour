@@ -33,6 +33,7 @@
 		3A377B352B7BE4ED00388D42 /* SF-Pro-Display-UltralightItalic.otf in Resources */ = {isa = PBXBuildFile; fileRef = 3A377B232B7BE4ED00388D42 /* SF-Pro-Display-UltralightItalic.otf */; };
 		3A377B362B7BE4ED00388D42 /* SF-Pro-Display-Ultralight.otf in Resources */ = {isa = PBXBuildFile; fileRef = 3A377B242B7BE4ED00388D42 /* SF-Pro-Display-Ultralight.otf */; };
 		3A377B372B7BE4ED00388D42 /* SF-Pro-Display-Heavy.otf in Resources */ = {isa = PBXBuildFile; fileRef = 3A377B252B7BE4ED00388D42 /* SF-Pro-Display-Heavy.otf */; };
+		3A377B3B2B7BF20100388D42 /* APIService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A377B3A2B7BF20100388D42 /* APIService.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -64,6 +65,7 @@
 		3A377B232B7BE4ED00388D42 /* SF-Pro-Display-UltralightItalic.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "SF-Pro-Display-UltralightItalic.otf"; sourceTree = "<group>"; };
 		3A377B242B7BE4ED00388D42 /* SF-Pro-Display-Ultralight.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "SF-Pro-Display-Ultralight.otf"; sourceTree = "<group>"; };
 		3A377B252B7BE4ED00388D42 /* SF-Pro-Display-Heavy.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "SF-Pro-Display-Heavy.otf"; sourceTree = "<group>"; };
+		3A377B3A2B7BF20100388D42 /* APIService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIService.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -103,6 +105,7 @@
 				3A05B8D52B7A7F3D00C9CB8A /* Assets.xcassets */,
 				3A05B8D72B7A7F3D00C9CB8A /* LaunchScreen.storyboard */,
 				3A377B112B7BE47E00388D42 /* Resources */,
+				3A377B392B7BF1C300388D42 /* NetworkLayer */,
 				3A377B102B7BDF8700388D42 /* Extension */,
 			);
 			path = NeoTour;
@@ -181,6 +184,14 @@
 				3A377B232B7BE4ED00388D42 /* SF-Pro-Display-UltralightItalic.otf */,
 			);
 			path = Fonts;
+			sourceTree = "<group>";
+		};
+		3A377B392B7BF1C300388D42 /* NetworkLayer */ = {
+			isa = PBXGroup;
+			children = (
+				3A377B3A2B7BF20100388D42 /* APIService.swift */,
+			);
+			path = NetworkLayer;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -272,6 +283,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				3A05B8D12B7A7F3C00C9CB8A /* OnboardingView.swift in Sources */,
+				3A377B3B2B7BF20100388D42 /* APIService.swift in Sources */,
 				3A377B0F2B7BDF7A00388D42 /* UIColor.swift in Sources */,
 				3A377B0C2B7BDA3300388D42 /* Onboarding.swift in Sources */,
 				3A05B8CD2B7A7F3C00C9CB8A /* AppDelegate.swift in Sources */,

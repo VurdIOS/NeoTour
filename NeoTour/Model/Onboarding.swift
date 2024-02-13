@@ -7,6 +7,6 @@
 
 import Foundation
 
-struct Onboarding {
-    var image: String
+struct Onboarding: Decodable {
+    var image: Data
 }
