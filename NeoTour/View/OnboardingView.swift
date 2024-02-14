@@ -64,6 +64,7 @@ class OnboardingView: UIViewController {
         super.viewDidLoad()
         view.backgroundColor = .white
         setupConstraints()
+        setupTargetAction()
     }
     
     override func viewDidLayoutSubviews() {
@@ -100,6 +101,16 @@ class OnboardingView: UIViewController {
             goButton.heightAnchor.constraint(equalToConstant: 53)
             
         ])
+    }
+    
+    private func setupTargetAction() {
+        goButton.addTarget(self, action: #selector(goButtonTapped), for: .touchUpInside)
+    }
+    
+    @objc func goButtonTapped() {
+        let vc = MainView()
+        navigationController?.pushViewController(vc, animated: true)
+        
     }
 }
 

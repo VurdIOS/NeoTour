@@ -6,3 +6,7 @@
 //
 
 import Foundation
+
+class MockFiles {
+    let mockForCarousel = ["Popular", "Featured", "Most visited", "Europe", "Asia"]
+}
