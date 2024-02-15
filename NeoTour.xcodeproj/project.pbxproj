@@ -37,6 +37,8 @@
 		3A377B362B7BE4ED00388D42 /* SF-Pro-Display-Ultralight.otf in Resources */ = {isa = PBXBuildFile; fileRef = 3A377B242B7BE4ED00388D42 /* SF-Pro-Display-Ultralight.otf */; };
 		3A377B372B7BE4ED00388D42 /* SF-Pro-Display-Heavy.otf in Resources */ = {isa = PBXBuildFile; fileRef = 3A377B252B7BE4ED00388D42 /* SF-Pro-Display-Heavy.otf */; };
 		3A377B3B2B7BF20100388D42 /* APIService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A377B3A2B7BF20100388D42 /* APIService.swift */; };
+		3A6C59962B7E7BB4009C4C38 /* MainModelView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A6C59952B7E7BB4009C4C38 /* MainModelView.swift */; };
+		3A6C59982B7E7CC5009C4C38 /* GaleryCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A6C59972B7E7CC5009C4C38 /* GaleryCollectionViewCell.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -72,6 +74,8 @@
 		3A377B242B7BE4ED00388D42 /* SF-Pro-Display-Ultralight.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "SF-Pro-Display-Ultralight.otf"; sourceTree = "<group>"; };
 		3A377B252B7BE4ED00388D42 /* SF-Pro-Display-Heavy.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "SF-Pro-Display-Heavy.otf"; sourceTree = "<group>"; };
 		3A377B3A2B7BF20100388D42 /* APIService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIService.swift; sourceTree = "<group>"; };
+		3A6C59952B7E7BB4009C4C38 /* MainModelView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainModelView.swift; sourceTree = "<group>"; };
+		3A6C59972B7E7CC5009C4C38 /* GaleryCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GaleryCollectionViewCell.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -122,6 +126,7 @@
 			isa = PBXGroup;
 			children = (
 				3A24B9DC2B7CB2A90031687A /* CarouselCollectionViewCell.swift */,
+				3A6C59972B7E7CC5009C4C38 /* GaleryCollectionViewCell.swift */,
 			);
 			path = CollectionView;
 			sourceTree = "<group>";
@@ -139,6 +144,7 @@
 			isa = PBXGroup;
 			children = (
 				3A377B062B7BD6BB00388D42 /* OnboardingViewModel.swift */,
+				3A6C59952B7E7BB4009C4C38 /* MainModelView.swift */,
 			);
 			path = ViewModel;
 			sourceTree = "<group>";
@@ -302,11 +308,13 @@
 				3A05B8D12B7A7F3C00C9CB8A /* OnboardingView.swift in Sources */,
 				3A24B9DA2B7CA6CD0031687A /* MainView.swift in Sources */,
 				3A377B3B2B7BF20100388D42 /* APIService.swift in Sources */,
+				3A6C59962B7E7BB4009C4C38 /* MainModelView.swift in Sources */,
 				3A377B0F2B7BDF7A00388D42 /* UIColor.swift in Sources */,
 				3A24B9DD2B7CB2A90031687A /* CarouselCollectionViewCell.swift in Sources */,
 				3A377B0C2B7BDA3300388D42 /* Onboarding.swift in Sources */,
 				3A05B8CD2B7A7F3C00C9CB8A /* AppDelegate.swift in Sources */,
 				3A05B8CF2B7A7F3C00C9CB8A /* SceneDelegate.swift in Sources */,
+				3A6C59982B7E7CC5009C4C38 /* GaleryCollectionViewCell.swift in Sources */,
 				3A377B072B7BD6BB00388D42 /* OnboardingViewModel.swift in Sources */,
 				3A24B9DF2B7CB47A0031687A /* MockFiles.swift in Sources */,
 			);
