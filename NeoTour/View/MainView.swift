@@ -9,6 +9,20 @@ import UIKit
 
 class MainView: UIViewController {
     
+    var pageControl : UIPageControl = {
+        let pc = UIPageControl(frame: .zero)
+        pc.currentPage = 0
+        pc.numberOfPages = 5
+        pc.currentPageIndicatorTintColor = .accentColor
+        pc.direction = .leftToRight
+        pc.pageIndicatorTintColor = .lightAccentColor
+        pc.backgroundStyle = .automatic
+        pc.translatesAutoresizingMaskIntoConstraints = false
+        return pc
+    }()
+    
+    
+    
     private let mock = MockFiles()
     
     private lazy var carouselCollectionView: UICollectionView = {
@@ -45,6 +59,7 @@ class MainView: UIViewController {
         )
         collectionView.translatesAutoresizingMaskIntoConstraints = false
         collectionView.indicatorStyle = .black
+        collectionView.showsHorizontalScrollIndicator = false
         return collectionView
     }()
     
@@ -64,6 +79,7 @@ class MainView: UIViewController {
         carouselCollectionView.dataSource = self
         galeryCollectionView.delegate = self
         galeryCollectionView.dataSource = self
+        
     }
     
     private func setupNavBar() {
@@ -78,6 +94,7 @@ class MainView: UIViewController {
         view.addSubview(carouselCollectionView)
         view.addSubview(pointUnderSelected)
         view.addSubview(galeryCollectionView)
+        view.addSubview(pageControl)
         
         NSLayoutConstraint.activate([
             carouselCollectionView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
@@ -88,7 +105,12 @@ class MainView: UIViewController {
             galeryCollectionView.topAnchor.constraint(equalTo: carouselCollectionView.bottomAnchor, constant: 23),
             galeryCollectionView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
             galeryCollectionView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
-            galeryCollectionView.heightAnchor.constraint(equalToConstant: 254)
+            galeryCollectionView.heightAnchor.constraint(equalToConstant: 254),
+            
+            pageControl.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+            pageControl.topAnchor.constraint(equalTo: galeryCollectionView.bottomAnchor, constant: 16),
+            pageControl.widthAnchor.constraint(equalToConstant: 200),
+            pageControl.heightAnchor.constraint(equalToConstant: 6)
         ])
     }
 }
@@ -103,7 +125,7 @@ extension MainView: UICollectionViewDelegate {
         } else if collectionView == galeryCollectionView {
             // Хз пригодиться нет, пока добавил
         }
-       
+        
     }
     func collectionView(_ collectionView: UICollectionView, didDeselectItemAt indexPath: IndexPath) {
         if collectionView == carouselCollectionView {
@@ -114,14 +136,23 @@ extension MainView: UICollectionViewDelegate {
             }
         } else if collectionView == galeryCollectionView {
             // Хз пригодиться нет, пока добавил
-            }
         }
+    }
+    
+    func scrollViewDidScroll(_ scrollView: UIScrollView) {
+        let scrollPos = scrollView.contentOffset.x / (view.frame.width * 0.75)
+        pageControl.currentPage = Int(scrollPos)
+        
+    }
+    
 }
+
 extension MainView: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         if collectionView == carouselCollectionView {
             return mock.mockForCarousel.count
         } else {
+            pageControl.numberOfPages = mock.mockForGalery.count
             return mock.mockForGalery.count
         }
         
@@ -160,7 +191,7 @@ extension MainView: UICollectionViewDelegateFlowLayout {
         }
         
     }
-
+    
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
         UIEdgeInsets(top: 0, left: 16, bottom: 0, right: 16)
     }

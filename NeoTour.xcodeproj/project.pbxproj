@@ -39,6 +39,7 @@
 		3A377B3B2B7BF20100388D42 /* APIService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A377B3A2B7BF20100388D42 /* APIService.swift */; };
 		3A6C59962B7E7BB4009C4C38 /* MainModelView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A6C59952B7E7BB4009C4C38 /* MainModelView.swift */; };
 		3A6C59982B7E7CC5009C4C38 /* GaleryCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A6C59972B7E7CC5009C4C38 /* GaleryCollectionViewCell.swift */; };
+		3AEC94B52B7F97A900F104B5 /* CustomPageControl.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AEC94B42B7F97A900F104B5 /* CustomPageControl.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -76,6 +77,7 @@
 		3A377B3A2B7BF20100388D42 /* APIService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIService.swift; sourceTree = "<group>"; };
 		3A6C59952B7E7BB4009C4C38 /* MainModelView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainModelView.swift; sourceTree = "<group>"; };
 		3A6C59972B7E7CC5009C4C38 /* GaleryCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GaleryCollectionViewCell.swift; sourceTree = "<group>"; };
+		3AEC94B42B7F97A900F104B5 /* CustomPageControl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomPageControl.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -118,6 +120,7 @@
 				3A377B112B7BE47E00388D42 /* Resources */,
 				3A377B392B7BF1C300388D42 /* NetworkLayer */,
 				3A377B102B7BDF8700388D42 /* Extension */,
+				3AEC94B42B7F97A900F104B5 /* CustomPageControl.swift */,
 			);
 			path = NeoTour;
 			sourceTree = "<group>";
@@ -317,6 +320,7 @@
 				3A6C59982B7E7CC5009C4C38 /* GaleryCollectionViewCell.swift in Sources */,
 				3A377B072B7BD6BB00388D42 /* OnboardingViewModel.swift in Sources */,
 				3A24B9DF2B7CB47A0031687A /* MockFiles.swift in Sources */,
+				3AEC94B52B7F97A900F104B5 /* CustomPageControl.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
