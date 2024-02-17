@@ -9,21 +9,20 @@ import UIKit
 
 class GaleryCollectionViewCell: UICollectionViewCell {
     static let id = "CarouselCollectionViewCell"
-    
-    
-    let cellLabel: UILabel = {
-        let btn = UILabel()
-        btn.backgroundColor = .clear
-        btn.translatesAutoresizingMaskIntoConstraints = false
-        btn.textAlignment = .center
-        btn.textColor = .white
-        btn.textAlignment = .left
-        btn.font = UIFont(name: "SFProDisplay-Semibold", size: 20)
+
+    private let cellLabel: UILabel = {
+        let lbl = UILabel()
+        lbl.backgroundColor = .clear
+        lbl.translatesAutoresizingMaskIntoConstraints = false
+        lbl.textAlignment = .center
+        lbl.textColor = .white
+        lbl.textAlignment = .left
+        lbl.font = UIFont(name: "SFProDisplay-Semibold", size: 20)
         
-        return btn
+        return lbl
     }()
     
-    lazy var cellImage: UIImageView = {
+    private lazy var cellImage: UIImageView = {
         let imageView = UIImageView()
         imageView.translatesAutoresizingMaskIntoConstraints = false
         imageView.backgroundColor = .accentColor
@@ -34,13 +33,16 @@ class GaleryCollectionViewCell: UICollectionViewCell {
         return imageView
     }()
     
-    lazy var blackoutBackground: UIView = {
+    private lazy var blackoutBackground: UIView = {
         let circleView = UIView()
         circleView.translatesAutoresizingMaskIntoConstraints = false
         circleView.backgroundColor = .blackoutColor
         
         return circleView
     }()
+    
+    // Нужно для изменении значения констрейнта для применения данной ячейки в другой коллекции
+    private lazy var leadingLabelConstraint = cellLabel.leadingAnchor.constraint(equalTo: cellImage.leadingAnchor, constant: 16)
     
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -55,7 +57,7 @@ class GaleryCollectionViewCell: UICollectionViewCell {
             cellImage.leftAnchor.constraint(equalTo: contentView.leftAnchor),
             cellImage.rightAnchor.constraint(equalTo: contentView.rightAnchor),
             
-            cellLabel.leadingAnchor.constraint(equalTo: cellImage.leadingAnchor, constant: 16),
+            leadingLabelConstraint,
             cellLabel.bottomAnchor.constraint(equalTo: cellImage.bottomAnchor, constant: -16),
             cellLabel.widthAnchor.constraint(equalTo: cellImage.widthAnchor, constant: -30),
             
@@ -65,7 +67,7 @@ class GaleryCollectionViewCell: UICollectionViewCell {
             blackoutBackground.heightAnchor.constraint(equalToConstant: 56)
             
             
-
+            
             
         ])
         contentView.clipsToBounds = false
@@ -77,6 +79,13 @@ class GaleryCollectionViewCell: UICollectionViewCell {
     func get(label: String, image: UIImage) {
         cellLabel.text = label
         cellImage.image = image
+    }
+    // Данная функция изменяет параметры ячейки, чтобы можно было применить эту же самую ячейку в другой коллекции а не создавать новую
+    func setupCell(labelFont: UIFont, cornerRadius: CGFloat, labelLeadingConstant: CGFloat) {
+        cellLabel.font = labelFont
+        cellImage.layer.cornerRadius = cornerRadius
+        leadingLabelConstraint.constant = labelLeadingConstant
+        layoutIfNeeded()
     }
     
     required init?(coder: NSCoder) {
