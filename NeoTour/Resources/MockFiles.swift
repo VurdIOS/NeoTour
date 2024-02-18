@@ -8,14 +8,10 @@
 import UIKit
 
 class MockFiles {
+    let loremText = "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque ut mauris condimentum, imperdiet lorem non, congue felis. Curabitur laoreet, ante ac pretium ultrices, nisi justo cursus metus, vitae sodales dolor."
     let mockForCarousel = ["Popular", "Featured", "Most visited", "Europe", "Asia"]
-    let mockForGalery = [galeryModel(title: "Northern Mountain", image: UIImage(named: "testImage")!), galeryModel(title: "Northern Mountain", image: UIImage(named: "testImage")!), galeryModel(title: "Northern Mountain", image: UIImage(named: "testImage")!), galeryModel(title: "Northern Mountain", image: UIImage(named: "testImage")!)]
-    let mockForRecommended = [galeryModel(title: "Northern Mountain", image: UIImage(named: "testImage")!), galeryModel(title: "Northern Mountain", image: UIImage(named: "testImage")!), galeryModel(title: "Northern Mountain", image: UIImage(named: "testImage")!), galeryModel(title: "Northern Mountain", image: UIImage(named: "testImage")!), galeryModel(title: "Northern Mountain", image: UIImage(named: "testImage")!), galeryModel(title: "Northern Mountain", image: UIImage(named: "testImage")!), galeryModel(title: "Northern Mountain", image: UIImage(named: "testImage")!), galeryModel(title: "Northern Mountain", image: UIImage(named: "testImage")!)]
-    
-    struct galeryModel {
-        var title: String
-        var image: UIImage
-    }
+    let mockForGalery = [galeryModel.getSomeData(), galeryModel.getSomeData(), galeryModel.getSomeData(), galeryModel.getSomeData(), galeryModel.getSomeData(), galeryModel.getSomeData()]
+    let mockForRecommended = [galeryModel.getSomeData(), galeryModel.getSomeData(), galeryModel.getSomeData(), galeryModel.getSomeData(), galeryModel.getSomeData(), galeryModel.getSomeData(), galeryModel.getSomeData(), galeryModel.getSomeData(), galeryModel.getSomeData(), galeryModel.getSomeData(), galeryModel.getSomeData(), galeryModel.getSomeData(), galeryModel.getSomeData(), galeryModel.getSomeData(), galeryModel.getSomeData(), galeryModel.getSomeData(), galeryModel.getSomeData(), galeryModel.getSomeData(), galeryModel.getSomeData()]
     
     
 }

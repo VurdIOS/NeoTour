@@ -158,9 +158,11 @@ extension MainView: UICollectionViewDelegate {
             }
         case galeryCollectionView:
             let vc = DetailInfoView()
+            vc.tourInfo = mock.mockForGalery[indexPath.row]
             navigationController?.pushViewController(vc, animated: true)
         case recommendedCollectionView:
             let vc = DetailInfoView()
+            vc.tourInfo = mock.mockForRecommended[indexPath.row]
             navigationController?.pushViewController(vc, animated: true)
         default: break
         }
