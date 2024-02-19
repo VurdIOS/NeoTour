@@ -8,7 +8,7 @@
 import UIKit
 
 class GaleryCollectionViewCell: UICollectionViewCell {
-    static let id = "CarouselCollectionViewCell"
+    static let id = "GaleryCollectionViewCell"
 
     private let cellLabel: UILabel = {
         let lbl = UILabel()

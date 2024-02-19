@@ -9,7 +9,7 @@ import UIKit
 
 class DetailInfoView: UIViewController {
     
-    var tourInfo: galeryModel!
+    var tourInfo: tourModel!
     
     private lazy var bgImage: UIImageView = {
         let image = UIImageView()
