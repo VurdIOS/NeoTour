@@ -269,13 +269,15 @@ extension SecondExampleViewController: UICollectionViewDelegate {
                 case .galeryTour:
                     if case let .galery(data) = item {
                         let vc = ThirdExampleDetailViewController()
-//                        vc.tourInfo = data
+                        vc.tourInfoForTop = [data]
+                        vc.tourInfoForBottom = [data]
                         navigationController?.pushViewController(vc, animated: true)
                     }
                 case .recommendedTour:
                     if case let .recommended(data) = item {
                         let vc = ThirdExampleDetailViewController()
-//                        vc.tourInfo = data
+                        vc.tourInfoForTop = [data]
+                        vc.tourInfoForBottom = [data]
                         navigationController?.pushViewController(vc, animated: true)
                     }
                 }

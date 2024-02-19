@@ -15,15 +15,17 @@ class ThirdExampleDetailViewController: UIViewController {
     }
     
     
-    let mock = MockFiles()
+    var tourInfoForTop: [tourModel] = []
+    var tourInfoForBottom: [tourModel] = []
     
     private var dataSource: UICollectionViewDiffableDataSource<Section,tourModel>!
     
     private lazy var mainViewCollectionView: UICollectionView = {
         let collectionView = UICollectionView(frame: .zero, collectionViewLayout: createLayout())
-        collectionView.register(DetailInfoTopCollectionCell.self, forCellWithReuseIdentifier: DetailInfoTopCollectionCell.id)
-        collectionView.register(DetailInfoBottomCollectionCell.self, forCellWithReuseIdentifier: DetailInfoBottomCollectionCell.id)
+        collectionView.register(DetailInfoTopCollectionCell.self, forCellWithReuseIdentifier: DetailInfoTopCollectionCell.reuseIdentifier)
+        collectionView.register(DetailInfoBottomCollectionCell.self, forCellWithReuseIdentifier: DetailInfoBottomCollectionCell.reuseIdentifier)
         collectionView.translatesAutoresizingMaskIntoConstraints = false
+        collectionView.backgroundColor = .white
         
         return collectionView
     }()
@@ -33,6 +35,7 @@ class ThirdExampleDetailViewController: UIViewController {
         view.backgroundColor = .lightAccentColor
         configureCollectionView()
         configureDataSource()
+        
 
     }
     
@@ -40,6 +43,7 @@ class ThirdExampleDetailViewController: UIViewController {
         let layout = UICollectionViewCompositionalLayout { (sectionIndex: Int,                                layoutEnvironment: NSCollectionLayoutEnvironment)
             -> NSCollectionLayoutSection? in
             let sectionLayoutKind = Section.allCases[sectionIndex]
+            let isWideView = layoutEnvironment.container.effectiveContentSize.width > 500
             switch sectionLayoutKind {
             case .topImage:
                 return self.generateTopImageLayout()
@@ -60,11 +64,14 @@ class ThirdExampleDetailViewController: UIViewController {
         
         let groupSize = NSCollectionLayoutSize(
             widthDimension: .fractionalWidth(1),
-            heightDimension: .fractionalWidth(0.5)
+            heightDimension: .absolute(389)
         )
         let group = NSCollectionLayoutGroup.vertical(layoutSize: groupSize, subitems: [item])
         
         let section = NSCollectionLayoutSection(group: group)
+        let navigationbar = (navigationController?.navigationBar.frame.height ?? 0) + view.safeAreaInsets.top
+        section.contentInsets = NSDirectionalEdgeInsets(top: -navigationbar  , leading: 0, bottom: 0, trailing: 0)
+
         
         return section
     }
@@ -78,23 +85,26 @@ class ThirdExampleDetailViewController: UIViewController {
         
         let groupSize = NSCollectionLayoutSize(
             widthDimension: .fractionalWidth(1),
-            heightDimension: .fractionalWidth(0.5)
+            heightDimension: .fractionalWidth(2)
         )
         let group = NSCollectionLayoutGroup.vertical(layoutSize: groupSize, subitems: [item])
         
         let section = NSCollectionLayoutSection(group: group)
+        section.contentInsets = NSDirectionalEdgeInsets(top: -35  , leading: 0, bottom: 0, trailing: 0)
         
         return section
     }
     
     private func configureCollectionView() {
         view.addSubview(mainViewCollectionView)
+            
         
         NSLayoutConstraint.activate([
             mainViewCollectionView.topAnchor.constraint(equalTo: view.topAnchor),
-            mainViewCollectionView.widthAnchor.constraint(equalTo: view.widthAnchor),
-            mainViewCollectionView.centerXAnchor.constraint(equalTo: view.centerXAnchor),
-            mainViewCollectionView.bottomAnchor.constraint(equalTo: view.bottomAnchor)])
+            mainViewCollectionView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
+            mainViewCollectionView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
+            mainViewCollectionView.bottomAnchor.constraint(equalTo: view.bottomAnchor)
+        ])
     }
     
     private func configureDataSource() {
@@ -104,7 +114,7 @@ class ThirdExampleDetailViewController: UIViewController {
             switch sectionType {
             case .topImage:
                 guard let cell = collectionView.dequeueReusableCell(
-                    withReuseIdentifier: DetailInfoTopCollectionCell.id,
+                    withReuseIdentifier: DetailInfoTopCollectionCell.reuseIdentifier,
                     for: indexPath
                 ) as? DetailInfoTopCollectionCell else {
                     fatalError("Failed to dequeue a cell of type CarouselCollectionViewCell")
@@ -113,7 +123,7 @@ class ThirdExampleDetailViewController: UIViewController {
                 return cell
             case .bottomInfo:
                 guard let cell = collectionView.dequeueReusableCell(
-                    withReuseIdentifier: DetailInfoBottomCollectionCell.id,
+                    withReuseIdentifier: DetailInfoBottomCollectionCell.reuseIdentifier,
                     for: indexPath
                 ) as? DetailInfoBottomCollectionCell else {
                     fatalError("Failed to dequeue a cell of type CarouselCollectionViewCell")
@@ -123,13 +133,12 @@ class ThirdExampleDetailViewController: UIViewController {
             }
         })
         var snapshot = NSDiffableDataSourceSnapshot<Section, tourModel>()
-        let tourModel = mock.mockForDetailViewTop
+        snapshot.appendSections([.topImage, .bottomInfo])
+        let tourModelTop = tourInfoForTop
+        let tourModelBottom = tourInfoForBottom
         
-        snapshot.appendSections([Section.topImage])
-        snapshot.appendItems(tourModel)
-        
-        snapshot.appendSections([Section.bottomInfo])
-        snapshot.appendItems(tourModel)
+        snapshot.appendItems(tourModelTop, toSection: .topImage)
+        snapshot.appendItems(tourModelBottom, toSection: .bottomInfo)
         
         dataSource.apply(snapshot, animatingDifferences: false)
         

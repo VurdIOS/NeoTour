@@ -8,7 +8,7 @@
 import UIKit
 
 class DetailInfoBottomCollectionCell: UICollectionViewCell {
-    static let id = "BottomCollectionViewCell"
+    static let reuseIdentifier = "BottomCollectionViewCell"
     
     private lazy var tourNameLabel: UILabel = {
         let lbl = UILabel()
@@ -45,6 +45,8 @@ class DetailInfoBottomCollectionCell: UICollectionViewCell {
         super.init(frame: frame)
         contentView.addSubview(tourNameLabel)
         contentView.addSubview(tourLocationLabel)
+        contentView.addSubview(tourDescriptionTitleLabel)
+        contentView.addSubview(tourDescriptionLabel)
         
         NSLayoutConstraint.activate([
             tourNameLabel.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 5),
@@ -65,7 +67,7 @@ class DetailInfoBottomCollectionCell: UICollectionViewCell {
             tourDescriptionLabel.topAnchor.constraint(equalTo: tourDescriptionTitleLabel.bottomAnchor, constant: 12),
             tourDescriptionLabel.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 16),
             tourDescriptionLabel.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -16),
-            tourDescriptionLabel.heightAnchor.constraint(equalToConstant: 92),
+            tourDescriptionLabel.heightAnchor.constraint(equalToConstant: 650),
             
         ])
         contentView.clipsToBounds = false

@@ -11,7 +11,9 @@ struct Onboarding: Decodable {
     var image: Data
 }
 
-struct tourModel: Hashable {
+struct tourModel: Hashable, Identifiable {
+    var id: UUID = UUID()
+    
     var title: String
     var image: UIImage
     var comments: [String]
@@ -32,3 +34,4 @@ struct tourModel: Hashable {
     private let identifier = UUID()
   
 }
+
