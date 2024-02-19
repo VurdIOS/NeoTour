@@ -66,8 +66,7 @@ class SecondExampleViewController: UIViewController {
     }
     
     func createLayout() -> UICollectionViewLayout {
-      let layout = UICollectionViewCompositionalLayout { (sectionIndex: Int,
-                                                          layoutEnvironment: NSCollectionLayoutEnvironment)
+      let layout = UICollectionViewCompositionalLayout { (sectionIndex: Int,                                layoutEnvironment: NSCollectionLayoutEnvironment)
         -> NSCollectionLayoutSection? in
         let isWideView = layoutEnvironment.container.effectiveContentSize.width > 500
         
@@ -91,7 +90,6 @@ class SecondExampleViewController: UIViewController {
         let item = NSCollectionLayoutItem(layoutSize: itemSize)
 
         let groupFractionalWidth = isWide ? 0.475 : 0.95
-        let groupFractionalHeight: Float = isWide ? 0.5 : 2/3
         let groupSize = NSCollectionLayoutSize(
           widthDimension: .fractionalWidth(CGFloat(groupFractionalWidth)),
           heightDimension: .absolute(CGFloat(50)))
@@ -260,7 +258,7 @@ extension SecondExampleViewController: UICollectionViewDelegate {
                 
                 switch section {
                 case .carouselTour:
-                    if case let .carousel(data) = item {
+                    if case let .carousel(_) = item {
                         if let cell = collectionView.cellForItem(at: indexPath) as? CarouselCollectionViewCell {
                             cell.segmentControl.font = UIFont(name: "SFProDisplay-Bold", size: 16)
                             cell.segmentControl.textColor = .accentColor
@@ -270,14 +268,14 @@ extension SecondExampleViewController: UICollectionViewDelegate {
                     }
                 case .galeryTour:
                     if case let .galery(data) = item {
-                        let vc = DetailInfoView()
-                        vc.tourInfo = mock.mockForGalery[indexPath.row]
+                        let vc = ThirdExampleDetailViewController()
+//                        vc.tourInfo = data
                         navigationController?.pushViewController(vc, animated: true)
                     }
                 case .recommendedTour:
                     if case let .recommended(data) = item {
-                        let vc = DetailInfoView()
-                        vc.tourInfo = mock.mockForRecommended[indexPath.row]
+                        let vc = ThirdExampleDetailViewController()
+//                        vc.tourInfo = data
                         navigationController?.pushViewController(vc, animated: true)
                     }
                 }
@@ -286,7 +284,7 @@ extension SecondExampleViewController: UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView, didDeselectItemAt indexPath: IndexPath) {
         if Section.allCases[indexPath.section] == .carouselTour {
             let item = dataSource.itemIdentifier(for: indexPath)
-            if case let .carousel(data) = item {
+            if case let .carousel(_) = item {
                 if let cell = collectionView.cellForItem(at: indexPath) as? CarouselCollectionViewCell {
                     cell.segmentControl.font = UIFont(name: "SFProDisplay-Regular", size: 16)
                     cell.segmentControl.textColor = .black

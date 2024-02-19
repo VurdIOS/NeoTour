@@ -28,26 +28,26 @@ class DetailInfoTopCollectionCell: UICollectionViewCell {
         return view
     }()
     
-    private lazy var tourNameLabel: UILabel = {
-        let lbl = UILabel()
-        lbl.font = UIFont(name: "SFProDisplay-Black", size: 24)
-        lbl.translatesAutoresizingMaskIntoConstraints = false
-        return lbl
-    }()
+//    private lazy var tourNameLabel: UILabel = {
+//        let lbl = UILabel()
+//        lbl.font = UIFont(name: "SFProDisplay-Black", size: 24)
+//        lbl.translatesAutoresizingMaskIntoConstraints = false
+//        return lbl
+//    }()
     
-    private lazy var tourLocationLabel: UILabel = {
-        let lbl = UILabel()
-        lbl.addImage(image: UIImage(named: "locationMark")!)
-        lbl.font = UIFont(name: "SFProDisplay-Medium", size: 12)
-        lbl.translatesAutoresizingMaskIntoConstraints = false
-        return lbl
-    }()
+//    private lazy var tourLocationLabel: UILabel = {
+//        let lbl = UILabel()
+//        lbl.addImage(image: UIImage(named: "locationMark")!)
+//        lbl.font = UIFont(name: "SFProDisplay-Medium", size: 12)
+//        lbl.translatesAutoresizingMaskIntoConstraints = false
+//        return lbl
+//    }()
     override init(frame: CGRect) {
         super.init(frame: frame)
         contentView.addSubview(image)
         image.addSubview(bottomBorder)
-        bottomBorder.addSubview(tourNameLabel)
-        bottomBorder.addSubview(tourLocationLabel)
+//        bottomBorder.addSubview(tourNameLabel)
+//        bottomBorder.addSubview(tourLocationLabel)
         
         NSLayoutConstraint.activate([
             bottomBorder.leadingAnchor.constraint(equalTo: contentView.leadingAnchor),
@@ -55,15 +55,15 @@ class DetailInfoTopCollectionCell: UICollectionViewCell {
             bottomBorder.bottomAnchor.constraint(equalTo: contentView.bottomAnchor),
             bottomBorder.heightAnchor.constraint(equalToConstant: 50),
             
-            tourNameLabel.topAnchor.constraint(equalTo: bottomBorder.topAnchor, constant: 20),
-            tourNameLabel.leadingAnchor.constraint(equalTo: bottomBorder.leadingAnchor, constant: 16),
-            tourNameLabel.trailingAnchor.constraint(equalTo: bottomBorder.trailingAnchor, constant: -16),
-            tourNameLabel.heightAnchor.constraint(equalToConstant: 29),
-            
-            tourLocationLabel.topAnchor.constraint(equalTo: tourNameLabel.bottomAnchor, constant: 12),
-            tourLocationLabel.leadingAnchor.constraint(equalTo: bottomBorder.leadingAnchor, constant: 16),
-            tourLocationLabel.trailingAnchor.constraint(equalTo: bottomBorder.trailingAnchor, constant: -16),
-            tourLocationLabel.heightAnchor.constraint(equalToConstant: 14),
+//            tourNameLabel.topAnchor.constraint(equalTo: bottomBorder.topAnchor, constant: 20),
+//            tourNameLabel.leadingAnchor.constraint(equalTo: bottomBorder.leadingAnchor, constant: 16),
+//            tourNameLabel.trailingAnchor.constraint(equalTo: bottomBorder.trailingAnchor, constant: -16),
+//            tourNameLabel.heightAnchor.constraint(equalToConstant: 29),
+//            
+//            tourLocationLabel.topAnchor.constraint(equalTo: tourNameLabel.bottomAnchor, constant: 12),
+//            tourLocationLabel.leadingAnchor.constraint(equalTo: bottomBorder.leadingAnchor, constant: 16),
+//            tourLocationLabel.trailingAnchor.constraint(equalTo: bottomBorder.trailingAnchor, constant: -16),
+//            tourLocationLabel.heightAnchor.constraint(equalToConstant: 14),
             
         ])
         contentView.clipsToBounds = false
@@ -73,9 +73,10 @@ class DetailInfoTopCollectionCell: UICollectionViewCell {
     }
     
     func get(data: tourModel) {
+        print("get data")
         image.image = UIImage(named: "\(data.image)")
-        tourNameLabel.text = data.title
-        tourLocationLabel.text = data.title
+//        tourNameLabel.text = data.title
+//        tourLocationLabel.text = data.title
     }
     
     required init?(coder: NSCoder) {
