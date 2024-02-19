@@ -137,28 +137,28 @@ class SecondExampleViewController: UIViewController {
     
     private func generateToursLayout(isWide: Bool) -> NSCollectionLayoutSection {
         let itemSize = NSCollectionLayoutSize(
-          widthDimension: .fractionalWidth(1.0),
-          heightDimension: .fractionalWidth(2/3))
+            widthDimension: .fractionalWidth(1.0),
+            heightDimension: .fractionalWidth(2/3))
         let item = NSCollectionLayoutItem(layoutSize: itemSize)
-
+        
         let groupFractionalWidth = isWide ? 0.475 : 0.95
         let groupFractionalHeight: Float = isWide ? 1/3 : 2/3
         let groupSize = NSCollectionLayoutSize(
-          widthDimension: .fractionalWidth(CGFloat(groupFractionalWidth)),
-          heightDimension: .fractionalWidth(CGFloat(groupFractionalHeight)))
+            widthDimension: .fractionalWidth(CGFloat(groupFractionalWidth)),
+            heightDimension: .fractionalWidth(CGFloat(groupFractionalHeight)))
         let group = NSCollectionLayoutGroup.horizontal(layoutSize: groupSize, subitems: [item])
         group.contentInsets = NSDirectionalEdgeInsets(
-          top: 5,
-          leading: 5,
-          bottom: 5,
-          trailing: 5)
+            top: 5,
+            leading: 5,
+            bottom: 5,
+            trailing: 5)
         
         let section = NSCollectionLayoutSection(group: group)
         section.orthogonalScrollingBehavior = .groupPaging
         
+      
         return section
     }
-    
     
     private func configureCollectionView() {
         view.addSubview(MainViewCollectionView)

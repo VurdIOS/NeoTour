@@ -15,6 +15,8 @@
 		3A1E2F812B82A63500BAF3EF /* ExampleViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A1E2F802B82A63500BAF3EF /* ExampleViewController.swift */; };
 		3A1E2F832B834E1600BAF3EF /* 2ExampleViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A1E2F822B834E1600BAF3EF /* 2ExampleViewController.swift */; };
 		3A1E2F862B83915600BAF3EF /* HeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A1E2F852B83915600BAF3EF /* HeaderView.swift */; };
+		3A1E2F882B839A4200BAF3EF /* 2ExampleDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A1E2F872B839A4200BAF3EF /* 2ExampleDetailViewController.swift */; };
+		3A1E2F8A2B839C1600BAF3EF /* DetailInfoTopCollectionCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A1E2F892B839C1600BAF3EF /* DetailInfoTopCollectionCell.swift */; };
 		3A24B9DA2B7CA6CD0031687A /* MainView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A24B9D92B7CA6CD0031687A /* MainView.swift */; };
 		3A24B9DD2B7CB2A90031687A /* CarouselCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A24B9DC2B7CB2A90031687A /* CarouselCollectionViewCell.swift */; };
 		3A24B9DF2B7CB47A0031687A /* MockFiles.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A24B9DE2B7CB47A0031687A /* MockFiles.swift */; };
@@ -59,6 +61,8 @@
 		3A1E2F802B82A63500BAF3EF /* ExampleViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExampleViewController.swift; sourceTree = "<group>"; };
 		3A1E2F822B834E1600BAF3EF /* 2ExampleViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = 2ExampleViewController.swift; sourceTree = "<group>"; };
 		3A1E2F852B83915600BAF3EF /* HeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HeaderView.swift; sourceTree = "<group>"; };
+		3A1E2F872B839A4200BAF3EF /* 2ExampleDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = 2ExampleDetailViewController.swift; sourceTree = "<group>"; };
+		3A1E2F892B839C1600BAF3EF /* DetailInfoTopCollectionCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailInfoTopCollectionCell.swift; sourceTree = "<group>"; };
 		3A24B9D92B7CA6CD0031687A /* MainView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainView.swift; sourceTree = "<group>"; };
 		3A24B9DC2B7CB2A90031687A /* CarouselCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CarouselCollectionViewCell.swift; sourceTree = "<group>"; };
 		3A24B9DE2B7CB47A0031687A /* MockFiles.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockFiles.swift; sourceTree = "<group>"; };
@@ -151,6 +155,7 @@
 			children = (
 				3A24B9DC2B7CB2A90031687A /* CarouselCollectionViewCell.swift */,
 				3A6C59972B7E7CC5009C4C38 /* GaleryCollectionViewCell.swift */,
+				3A1E2F892B839C1600BAF3EF /* DetailInfoTopCollectionCell.swift */,
 			);
 			path = CollectionView;
 			sourceTree = "<group>";
@@ -163,6 +168,7 @@
 				3AB2E1BF2B8107FA000540BF /* DetailInfoView.swift */,
 				3A1E2F802B82A63500BAF3EF /* ExampleViewController.swift */,
 				3A1E2F822B834E1600BAF3EF /* 2ExampleViewController.swift */,
+				3A1E2F872B839A4200BAF3EF /* 2ExampleDetailViewController.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -335,6 +341,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				3A05B8D12B7A7F3C00C9CB8A /* OnboardingView.swift in Sources */,
+				3A1E2F882B839A4200BAF3EF /* 2ExampleDetailViewController.swift in Sources */,
 				3A24B9DA2B7CA6CD0031687A /* MainView.swift in Sources */,
 				3A377B3B2B7BF20100388D42 /* APIService.swift in Sources */,
 				3AB2E1C22B81080D000540BF /* DetailInfoViewModel.swift in Sources */,
@@ -352,6 +359,7 @@
 				3A1E2F812B82A63500BAF3EF /* ExampleViewController.swift in Sources */,
 				3A377B072B7BD6BB00388D42 /* OnboardingViewModel.swift in Sources */,
 				3A24B9DF2B7CB47A0031687A /* MockFiles.swift in Sources */,
+				3A1E2F8A2B839C1600BAF3EF /* DetailInfoTopCollectionCell.swift in Sources */,
 				3AEC94B52B7F97A900F104B5 /* CustomPageControl.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

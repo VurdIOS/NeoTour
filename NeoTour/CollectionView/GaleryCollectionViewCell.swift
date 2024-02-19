@@ -28,17 +28,16 @@ class GaleryCollectionViewCell: UICollectionViewCell {
         imageView.backgroundColor = .accentColor
         imageView.clipsToBounds = true
         imageView.layer.cornerRadius = 19
-        imageView.backgroundColor = .blue
         
         return imageView
     }()
     
     private lazy var blackoutBackground: UIView = {
-        let circleView = UIView()
-        circleView.translatesAutoresizingMaskIntoConstraints = false
-        circleView.backgroundColor = .blackoutColor
+        let view = UIView()
+        view.translatesAutoresizingMaskIntoConstraints = false
+        view.backgroundColor = .blackoutColor
         
-        return circleView
+        return view
     }()
     
     // Нужно для изменении значения констрейнта для применения данной ячейки в другой коллекции
