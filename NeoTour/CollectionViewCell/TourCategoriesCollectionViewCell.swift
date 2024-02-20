@@ -7,7 +7,7 @@
 
 import UIKit
 
-class CarouselCollectionViewCell: UICollectionViewCell {
+class TourCategoriesCollectionViewCell: UICollectionViewCell {
     static let id = "CarouselCollectionViewCell"
     
 
@@ -55,8 +55,8 @@ class CarouselCollectionViewCell: UICollectionViewCell {
         
     }
     
-    func get(data: String) {
-        segmentControl.text = data
+    func get(data: Categories) {
+        segmentControl.text = data.title
     }
     
     required init?(coder: NSCoder) {

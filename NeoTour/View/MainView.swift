@@ -1,107 +1,63 @@
 //
-//  MainView.swift
+//  2ExampleViewController.swift
 //  NeoTour
 //
-//  Created by Камаль Атавалиев on 14.02.2024.
+//  Created by Камаль Атавалиев on 19.02.2024.
 //
 
 import UIKit
 
 class MainView: UIViewController {
     
-    private let mock = MockFiles()
+    static let sectionHeaderElementKind = "section-header-element-kin"
     
-    private lazy var carouselCollectionView: UICollectionView = {
-        let collectionView = UICollectionView(frame: .zero, collectionViewLayout: carouselCollectionViewFlowLayout)
-        collectionView.register(
-            CarouselCollectionViewCell.self,
-            forCellWithReuseIdentifier: CarouselCollectionViewCell.id
-        )
-        collectionView.translatesAutoresizingMaskIntoConstraints = false
-        collectionView.showsHorizontalScrollIndicator = false
-        return collectionView
-    }()
-    
-    private let carouselCollectionViewFlowLayout: UICollectionViewFlowLayout = {
-        let flow = UICollectionViewFlowLayout()
-        flow.scrollDirection = .horizontal
-        return flow
-    }()
-    
-    private lazy var pointUnderSelected: UIView = {
-        let shapeView = UIView()
-        shapeView.backgroundColor = .accentColor
-        //        shapeView.layer.cornerRadius = min(self.bounds.width, self.bounds.height) / 2
-        shapeView.isHidden = true
-        shapeView.translatesAutoresizingMaskIntoConstraints = false
-        return shapeView
-    }()
-    
-    private lazy var galeryCollectionView: UICollectionView = {
-        let collectionView = UICollectionView(frame: .zero, collectionViewLayout: galeryCollectionViewFlowLayout)
-        collectionView.register(
-            GaleryCollectionViewCell.self,
-            forCellWithReuseIdentifier: GaleryCollectionViewCell.id
-        )
-        collectionView.translatesAutoresizingMaskIntoConstraints = false
-        collectionView.indicatorStyle = .black
-        collectionView.showsHorizontalScrollIndicator = false
-        return collectionView
-    }()
-    
-    private let galeryCollectionViewFlowLayout: UICollectionViewFlowLayout = {
-        let flow = UICollectionViewFlowLayout()
-        flow.scrollDirection = .horizontal
-        return flow
-    }()
-    
-    var pageControl : UIPageControl = {
-        let pc = UIPageControl(frame: .zero)
-        pc.currentPage = 0
-        pc.numberOfPages = 5
-        pc.currentPageIndicatorTintColor = .accentColor
-        pc.direction = .leftToRight
-        pc.pageIndicatorTintColor = .lightAccentColor
-        pc.backgroundStyle = .automatic
-        pc.translatesAutoresizingMaskIntoConstraints = false
-        return pc
-    }()
-    
-    private var recommendedLabel: UILabel = {
-        let lbl = UILabel()
-        lbl.text = "Recommended"
-        lbl.font = UIFont(name: "SFProDisplay-Black", size: 20)
-        lbl.translatesAutoresizingMaskIntoConstraints = false
-        return lbl
-    }()
-    
-    private lazy var recommendedCollectionView: UICollectionView = {
-        let collectionView = UICollectionView(frame: .zero, collectionViewLayout: UICollectionViewFlowLayout())
-        collectionView.register(
-            GaleryCollectionViewCell.self,
-            forCellWithReuseIdentifier: GaleryCollectionViewCell.id
-        )
-        collectionView.translatesAutoresizingMaskIntoConstraints = false
-        collectionView.indicatorStyle = .black
-        collectionView.showsHorizontalScrollIndicator = false
-        return collectionView
-    }()
-    
-    
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        view.backgroundColor = .white
-        setupNavBar()
-        setupConstraints()
-        carouselCollectionView.delegate = self
-        carouselCollectionView.dataSource = self
-        galeryCollectionView.delegate = self
-        galeryCollectionView.dataSource = self
-        recommendedCollectionView.delegate = self
-        recommendedCollectionView.dataSource = self
-        
+    enum Section: CaseIterable {
+        case carouselTour
+        case galeryTour
+        case recommendedTour
     }
     
+    enum Item: Hashable {
+        
+        case carousel(Categories)
+        case galery(TourModel)
+        case recommended(TourModel)
+    }
+    
+    let mock = MockFiles()
+    
+    private var dataSource: UICollectionViewDiffableDataSource<Section, Item>!
+    
+    private lazy var MainViewCollectionView: UICollectionView = {
+        let collectionView = UICollectionView(frame: .zero, collectionViewLayout: createLayout())
+        collectionView.register(
+            TourCategoriesCollectionViewCell.self,
+            forCellWithReuseIdentifier: TourCategoriesCollectionViewCell.id
+        )
+        collectionView.register(
+            GaleryCollectionViewCell.self,
+            forCellWithReuseIdentifier: GaleryCollectionViewCell.id
+        )
+        collectionView.register(HeaderView.self, forSupplementaryViewOfKind: MainView.sectionHeaderElementKind, withReuseIdentifier: HeaderView.reuseIdentifier)
+        collectionView.register(
+            GaleryCollectionViewCell.self,
+            forCellWithReuseIdentifier: GaleryCollectionViewCell.id
+        )
+        collectionView.translatesAutoresizingMaskIntoConstraints = false
+        collectionView.indicatorStyle = .black
+        collectionView.showsHorizontalScrollIndicator = false
+        return collectionView
+    }()
+    
+
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        MainViewCollectionView.delegate = self
+        view.backgroundColor = .white
+        configureCollectionView()
+        configureDataSource()
+        setupNavBar()
+    }
     private func setupNavBar() {
         self.navigationItem.hidesBackButton = true
         let titleLabel = UILabel()
@@ -110,154 +66,233 @@ class MainView: UIViewController {
         navigationItem.leftBarButtonItem = UIBarButtonItem(customView: titleLabel)
     }
     
-    private func setupConstraints() {
-        view.addSubview(carouselCollectionView)
-        view.addSubview(pointUnderSelected)
-        view.addSubview(galeryCollectionView)
-        view.addSubview(pageControl)
-        view.addSubview(recommendedLabel)
-        view.addSubview(recommendedCollectionView)
+    func createLayout() -> UICollectionViewLayout {
+      let layout = UICollectionViewCompositionalLayout { (sectionIndex: Int,                                layoutEnvironment: NSCollectionLayoutEnvironment)
+        -> NSCollectionLayoutSection? in
+        let isWideView = layoutEnvironment.container.effectiveContentSize.width > 500
         
-        NSLayoutConstraint.activate([
-            carouselCollectionView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
-            carouselCollectionView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
-            carouselCollectionView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
-            carouselCollectionView.heightAnchor.constraint(equalToConstant: 50),
-            
-            galeryCollectionView.topAnchor.constraint(equalTo: carouselCollectionView.bottomAnchor, constant: 23),
-            galeryCollectionView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
-            galeryCollectionView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
-            galeryCollectionView.heightAnchor.constraint(equalToConstant: 254),
-            
-            pageControl.centerXAnchor.constraint(equalTo: view.centerXAnchor),
-            pageControl.topAnchor.constraint(equalTo: galeryCollectionView.bottomAnchor, constant: 16),
-            pageControl.widthAnchor.constraint(equalToConstant: 200),
-            pageControl.heightAnchor.constraint(equalToConstant: 6),
-            
-            recommendedLabel.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 16),
-            recommendedLabel.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -16),
-            recommendedLabel.heightAnchor.constraint(equalToConstant: 24),
-            recommendedLabel.topAnchor.constraint(equalTo: pageControl.bottomAnchor, constant: 32),
-            
-            recommendedCollectionView.topAnchor.constraint(equalTo: recommendedLabel.bottomAnchor, constant: 18),
-            recommendedCollectionView.widthAnchor.constraint(equalTo: view.widthAnchor),
-            recommendedCollectionView.centerXAnchor.constraint(equalTo: view.centerXAnchor),
-            recommendedCollectionView.bottomAnchor.constraint(equalTo: view.bottomAnchor)
-        ])
+        let sectionLayoutKind = Section.allCases[sectionIndex]
+        switch (sectionLayoutKind) {
+        case .carouselTour:
+            return self.generateCarouselLayout(isWide: isWideView)
+        case .galeryTour:
+            return self.generateToursLayout(isWide: isWideView)
+        case .recommendedTour:
+            return self.generateRecommendedTourLayout()
+        }
+      }
+      return layout
     }
+    
+    private func generateCarouselLayout(isWide: Bool) -> NSCollectionLayoutSection {
+        let itemSize = NSCollectionLayoutSize(
+            widthDimension: .fractionalWidth(0.25),
+            heightDimension: .fractionalHeight(1))
+        let item = NSCollectionLayoutItem(layoutSize: itemSize)
+
+        let groupFractionalWidth = isWide ? 0.475 : 0.95
+        let groupSize = NSCollectionLayoutSize(
+          widthDimension: .fractionalWidth(CGFloat(groupFractionalWidth)),
+          heightDimension: .absolute(CGFloat(50)))
+        let group = NSCollectionLayoutGroup.horizontal(layoutSize: groupSize, subitems: [item])
+        group.contentInsets = NSDirectionalEdgeInsets(
+          top: 5,
+          leading: 5,
+          bottom: 5,
+          trailing: 5)
+        
+        let section = NSCollectionLayoutSection(group: group)
+        section.orthogonalScrollingBehavior = .continuous
+        
+        return section
+    }
+    
+    private func generateRecommendedTourLayout() -> NSCollectionLayoutSection {
+        let itemSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(0.5), heightDimension: .fractionalHeight(1.0))
+        let item = NSCollectionLayoutItem(layoutSize: itemSize)
+        item.contentInsets  = NSDirectionalEdgeInsets(
+            top: 5,
+            leading: 5,
+            bottom: 5,
+            trailing: 5)
+        
+        let groupSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1), heightDimension: .fractionalWidth(0.5))
+        let group = NSCollectionLayoutGroup.horizontal(layoutSize: groupSize, subitems: [item])
+        
+        let headerSize = NSCollectionLayoutSize(
+          widthDimension: .fractionalWidth(1.0),
+          heightDimension: .estimated(44))
+        let sectionHeader = NSCollectionLayoutBoundarySupplementaryItem(
+          layoutSize: headerSize,
+          elementKind: MainView.sectionHeaderElementKind,
+          alignment: .top)
+        
+        let section = NSCollectionLayoutSection(group: group)
+        section.boundarySupplementaryItems = [sectionHeader]
+        
+        
+        return section
+    }
+    
+    private func generateToursLayout(isWide: Bool) -> NSCollectionLayoutSection {
+        let itemSize = NSCollectionLayoutSize(
+            widthDimension: .fractionalWidth(1.0),
+            heightDimension: .fractionalWidth(2/3))
+        let item = NSCollectionLayoutItem(layoutSize: itemSize)
+        
+        let groupFractionalWidth = isWide ? 0.475 : 0.95
+        let groupFractionalHeight: Float = isWide ? 1/3 : 2/3
+        let groupSize = NSCollectionLayoutSize(
+            widthDimension: .fractionalWidth(CGFloat(groupFractionalWidth)),
+            heightDimension: .fractionalWidth(CGFloat(groupFractionalHeight)))
+        let group = NSCollectionLayoutGroup.horizontal(layoutSize: groupSize, subitems: [item])
+        group.contentInsets = NSDirectionalEdgeInsets(
+            top: 5,
+            leading: 5,
+            bottom: 5,
+            trailing: 5)
+        
+        let section = NSCollectionLayoutSection(group: group)
+        section.orthogonalScrollingBehavior = .groupPaging
+        
+      
+        return section
+    }
+    
+    private func configureCollectionView() {
+        view.addSubview(MainViewCollectionView)
+        NSLayoutConstraint.activate([
+            
+            MainViewCollectionView.topAnchor.constraint(equalTo: view.topAnchor),
+            MainViewCollectionView.widthAnchor.constraint(equalTo: view.widthAnchor),
+            MainViewCollectionView.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+            MainViewCollectionView.bottomAnchor.constraint(equalTo: view.bottomAnchor)])
+    }
+    
+    private func configureDataSource() {
+        dataSource = UICollectionViewDiffableDataSource<Section, Item>(collectionView: MainViewCollectionView, cellProvider: { (collectionView, indexPath, item) -> UICollectionViewCell? in
+
+            let sectionType = Section.allCases[indexPath.section]
+            switch sectionType {
+            case .carouselTour:
+                guard case let .carousel(data) = item else {
+                                fatalError("Invalid item type for carouselTour section")
+                            }
+                guard let cell = collectionView.dequeueReusableCell(
+                    withReuseIdentifier: TourCategoriesCollectionViewCell.id,
+                    for: indexPath
+                ) as? TourCategoriesCollectionViewCell else {
+                    fatalError("Failed to dequeue a cell of type CarouselCollectionViewCell")
+                }
+                cell.get(data: data)
+                return cell
+            case .galeryTour:
+                guard case let .galery(data) = item else {
+                                fatalError("Invalid item type for carouselTour section")
+                            }
+                let cell = collectionView.dequeueReusableCell(
+                  withReuseIdentifier: GaleryCollectionViewCell.id,
+                  for: indexPath
+                ) as! GaleryCollectionViewCell
+                cell.get(label: data.title, image: data.image)
+                return cell
+            case .recommendedTour:
+                guard case let .recommended(data) = item else {
+                                fatalError("Invalid item type for carouselTour section")
+                            }
+                let cell = collectionView.dequeueReusableCell(
+                    withReuseIdentifier: GaleryCollectionViewCell.id,
+                    for: indexPath
+                ) as! GaleryCollectionViewCell
+                cell.get(label: data.title, image: data.image)
+                cell.setupCell(labelFont: UIFont(name: "SFProDisplay-Semibold", size: 14)!, cornerRadius: 10, labelLeadingConstant: 12)
+                return cell
+            }
+            
+        })
+        dataSource.supplementaryViewProvider = { (
+          collectionView: UICollectionView,
+          kind: String,
+          indexPath: IndexPath)
+          -> UICollectionReusableView? in
+          
+          guard let supplementaryView = collectionView.dequeueReusableSupplementaryView(
+            ofKind: kind,
+            withReuseIdentifier: HeaderView.reuseIdentifier,
+            for: indexPath) as? HeaderView else {
+            fatalError("Cannot create header view")
+          }
+          
+          supplementaryView.label.text = "Recommended"
+          return supplementaryView
+        }
+        
+        // Создание снимка
+        var snapshot = NSDiffableDataSourceSnapshot<Section, Item>()
+
+        // Добавление секций
+        snapshot.appendSections([.carouselTour, .galeryTour, .recommendedTour])
+
+        // Добавление элементов для каждой секции
+        let carouselItems = mock.mock.categories // Пример данных для секции "carouselTour"
+        snapshot.appendItems(carouselItems.map { Item.carousel($0) }, toSection: .carouselTour)
+
+        let galeryItems: [TourModel] = mock.mock.toursForGalery
+        snapshot.appendItems(galeryItems.map { Item.galery($0) }, toSection: .galeryTour)
+
+        let recommendedItems: [TourModel] = mock.mock.toursForReccomended
+        snapshot.appendItems(recommendedItems.map { Item.recommended($0) }, toSection: .recommendedTour)
+
+        // Применение снимка к источнику данных
+        dataSource.apply(snapshot, animatingDifferences: false)
+
+    }
+    
+    
 }
+
+
 extension MainView: UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        switch collectionView {
-        case carouselCollectionView:
-            if let cell = collectionView.cellForItem(at: indexPath) as? CarouselCollectionViewCell {
-                cell.segmentControl.font = UIFont(name: "SFProDisplay-Bold", size: 16)
-                cell.segmentControl.textColor = .accentColor
-                cell.pointUnderSelected.isHidden = false
+        let section = Section.allCases[indexPath.section]
+                let item = dataSource.itemIdentifier(for: indexPath)
+                
+                switch section {
+                case .carouselTour:
+                    if case let .carousel(_) = item {
+                        if let cell = collectionView.cellForItem(at: indexPath) as? TourCategoriesCollectionViewCell {
+                            cell.segmentControl.font = UIFont(name: "SFProDisplay-Bold", size: 16)
+                            cell.segmentControl.textColor = .accentColor
+                            cell.pointUnderSelected.isHidden = false
 
-            }
-        case galeryCollectionView:
-            let vc = DetailInfoView()
-            vc.tourInfo = mock.mockForGalery[indexPath.row]
-            navigationController?.pushViewController(vc, animated: true)
-        case recommendedCollectionView:
-            let vc = DetailInfoView()
-            vc.tourInfo = mock.mockForRecommended[indexPath.row]
-            navigationController?.pushViewController(vc, animated: true)
-        default: break
+                            }
+                    }
+                case .galeryTour:
+                    if case let .galery(data) = item {
+                        let vc = TourDetailsView()
+                        vc.tour = data
+                        navigationController?.pushViewController(vc, animated: true)
+                    }
+                case .recommendedTour:
+                    if case let .recommended(data) = item {
+                        let vc = TourDetailsView()
+                        vc.tour = data
+                        navigationController?.pushViewController(vc, animated: true)
+                    }
+                }
         }
-        
-    }
+    
     func collectionView(_ collectionView: UICollectionView, didDeselectItemAt indexPath: IndexPath) {
-        if collectionView == carouselCollectionView {
-            if let cell = collectionView.cellForItem(at: indexPath) as? CarouselCollectionViewCell {
-                cell.segmentControl.font = UIFont(name: "SFProDisplay-Regular", size: 16)
-                cell.segmentControl.textColor = .black
-                cell.pointUnderSelected.isHidden = true
+        if Section.allCases[indexPath.section] == .carouselTour {
+            let item = dataSource.itemIdentifier(for: indexPath)
+            if case let .carousel(_) = item {
+                if let cell = collectionView.cellForItem(at: indexPath) as? TourCategoriesCollectionViewCell {
+                    cell.segmentControl.font = UIFont(name: "SFProDisplay-Regular", size: 16)
+                    cell.segmentControl.textColor = .black
+                    cell.pointUnderSelected.isHidden = true
+
+                    }
             }
-        }
-    }
-    
-    func scrollViewDidScroll(_ scrollView: UIScrollView) {
-        let scrollPos = scrollView.contentOffset.x / (view.frame.width * 0.75)
-        pageControl.currentPage = Int(scrollPos)
-        
-    }
-    
-}
-
-extension MainView: UICollectionViewDataSource {
-    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        switch collectionView {
-        case carouselCollectionView:
-            return mock.mockForCarousel.count
-        case galeryCollectionView:
-            pageControl.numberOfPages = mock.mockForGalery.count
-            return mock.mockForGalery.count
-        case recommendedCollectionView:
-            return mock.mockForRecommended.count
-        default: return 0
-        }
-    }
-    
-    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        switch collectionView {
-        case carouselCollectionView:
-            let cell = collectionView.dequeueReusableCell(
-                withReuseIdentifier: CarouselCollectionViewCell.id,
-                for: indexPath
-            ) as! CarouselCollectionViewCell
-            cell.get(data: mock.mockForCarousel[indexPath.item])
-            return cell
-        case galeryCollectionView:
-            let cell = collectionView.dequeueReusableCell(
-                withReuseIdentifier: GaleryCollectionViewCell.id,
-                for: indexPath
-            ) as! GaleryCollectionViewCell
-            let mock = mock.mockForGalery[indexPath.row]
-            cell.get(label: mock.title, image: mock.image)
-            return cell
-        case recommendedCollectionView:
-            let cell = collectionView.dequeueReusableCell(
-                withReuseIdentifier: GaleryCollectionViewCell.id,
-                for: indexPath
-            ) as! GaleryCollectionViewCell
-            let mock = mock.mockForRecommended[indexPath.row]
-            cell.get(label: mock.title, image: mock.image)
-            cell.setupCell(labelFont: UIFont(name: "SFProDisplay-Semibold", size: 14)!, cornerRadius: 10, labelLeadingConstant: 12)
-            return cell
-        default: return UICollectionViewCell()
-        }
-    }
-}
-
-//TODO: Сделать нормальную ширину ячейки
-extension MainView: UICollectionViewDelegateFlowLayout {
-    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        switch collectionView {
-        case carouselCollectionView:
-            return CGSize(width: mock.mockForCarousel[indexPath.row].count * 10, height: 50)
-        case galeryCollectionView:
-            let width = view.frame.width - 80
-            let height = width * 0.758
-            return CGSize(width: width, height: height)
-        case recommendedCollectionView:
-            let width = ((recommendedCollectionView.frame.width - 45) / 2)
-            let height = width
-            return CGSize(width: width, height: height)
-        default: return CGSize()
-        }
-    }
-    // Посмотреть где куда какие размеры надо
-    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
-        switch collectionView {
-        case carouselCollectionView:
-            return UIEdgeInsets(top: 0, left: 16, bottom: 0, right: 16)
-        case galeryCollectionView:
-            return UIEdgeInsets(top: 0, left: 16, bottom: 0, right: 16)
-        case recommendedCollectionView:
-            return UIEdgeInsets(top: 0, left: 16, bottom: 0, right: 16)
-        default: return UIEdgeInsets(top: 0, left: 16, bottom: 0, right: 16)
         }
     }
 }
