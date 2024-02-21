@@ -9,7 +9,12 @@ import UIKit
 
 class TourDetailsView: UIViewController {
     
-    var tour: TourModel!
+    var tour: Tour!
+    var viewModel: TourDetailViewModelProtocol! {
+        didSet {
+            
+        }
+    }
 
     private let tableView: UITableView = {
         let tableView = UITableView()
@@ -22,6 +27,7 @@ class TourDetailsView: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        viewModel = TourDetailViewModel(tour: tour)
         view.addSubview(tableView)
         tableView.frame = view.bounds
         tableView.dataSource = self

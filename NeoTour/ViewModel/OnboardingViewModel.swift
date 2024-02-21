@@ -6,3 +6,10 @@
 //
 
 import Foundation
+protocol OnboardinViewModelProtocol {
+    
+}
+
+class OnboardingViewModel : OnboardinViewModelProtocol {
+    
+}

@@ -144,7 +144,7 @@ class TourDetailsBottomCollectionCell: UITableViewCell {
            ])
        }
        
-       func configure(tour: TourModel) {
+       func configure(tour: Tour) {
            tourNameLabel.text = tour.title
            tourLocationLabel.attributedText = NSAttributedString(string: tour.title)
            tourDescriptionLabel.attributedText = tour.description.createLine(spacing: 7)

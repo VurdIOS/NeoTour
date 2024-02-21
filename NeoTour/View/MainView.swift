@@ -20,8 +20,8 @@ class MainView: UIViewController {
     enum Item: Hashable {
         
         case carousel(Categories)
-        case galery(TourModel)
-        case recommended(TourModel)
+        case galery(Tour)
+        case recommended(Tour)
     }
     
     let mock = MockFiles()
@@ -237,10 +237,10 @@ class MainView: UIViewController {
         let carouselItems = mock.mock.categories // Пример данных для секции "carouselTour"
         snapshot.appendItems(carouselItems.map { Item.carousel($0) }, toSection: .carouselTour)
 
-        let galeryItems: [TourModel] = mock.mock.toursForGalery
+        let galeryItems: [Tour] = mock.mock.toursForGalery
         snapshot.appendItems(galeryItems.map { Item.galery($0) }, toSection: .galeryTour)
 
-        let recommendedItems: [TourModel] = mock.mock.toursForReccomended
+        let recommendedItems: [Tour] = mock.mock.toursForReccomended
         snapshot.appendItems(recommendedItems.map { Item.recommended($0) }, toSection: .recommendedTour)
 
         // Применение снимка к источнику данных

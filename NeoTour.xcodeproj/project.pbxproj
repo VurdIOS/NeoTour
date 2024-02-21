@@ -43,7 +43,7 @@
 		3A377B3B2B7BF20100388D42 /* networkService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A377B3A2B7BF20100388D42 /* networkService.swift */; };
 		3A50B9772B84E9300046BF68 /* BookView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A50B9762B84E9300046BF68 /* BookView.swift */; };
 		3A50B9792B84E93C0046BF68 /* BookViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A50B9782B84E93C0046BF68 /* BookViewModel.swift */; };
-		3A50B97B2B84E9970046BF68 /* TourModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A50B97A2B84E9970046BF68 /* TourModel.swift */; };
+		3A50B97B2B84E9970046BF68 /* Tour.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A50B97A2B84E9970046BF68 /* Tour.swift */; };
 		3A6C59962B7E7BB4009C4C38 /* MainViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A6C59952B7E7BB4009C4C38 /* MainViewModel.swift */; };
 		3A6C59982B7E7CC5009C4C38 /* GaleryCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A6C59972B7E7CC5009C4C38 /* GaleryCollectionViewCell.swift */; };
 		3A7C1CBE2B83D16400E70D1E /* DetailInfoBottomCollectionCellT.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A7C1CBD2B83D16400E70D1E /* DetailInfoBottomCollectionCellT.swift */; };
@@ -55,7 +55,7 @@
 		3ABC13222B84B29E007DED14 /* String.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3ABC13212B84B29E007DED14 /* String.swift */; };
 		3ABC13242B84B4D8007DED14 /* CommentsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3ABC13232B84B4D8007DED14 /* CommentsView.swift */; };
 		3AC7B6DF2B822EEC00786BD0 /* UILabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AC7B6DE2B822EEC00786BD0 /* UILabel.swift */; };
-		3AEC94B52B7F97A900F104B5 /* CustomPageControl.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AEC94B42B7F97A900F104B5 /* CustomPageControl.swift */; };
+		3AEC94B52B7F97A900F104B5 /* CustomPageControlView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AEC94B42B7F97A900F104B5 /* CustomPageControlView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -97,7 +97,7 @@
 		3A377B3A2B7BF20100388D42 /* networkService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = networkService.swift; sourceTree = "<group>"; };
 		3A50B9762B84E9300046BF68 /* BookView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookView.swift; sourceTree = "<group>"; };
 		3A50B9782B84E93C0046BF68 /* BookViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookViewModel.swift; sourceTree = "<group>"; };
-		3A50B97A2B84E9970046BF68 /* TourModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TourModel.swift; sourceTree = "<group>"; };
+		3A50B97A2B84E9970046BF68 /* Tour.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Tour.swift; sourceTree = "<group>"; };
 		3A6C59952B7E7BB4009C4C38 /* MainViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewModel.swift; sourceTree = "<group>"; };
 		3A6C59972B7E7CC5009C4C38 /* GaleryCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GaleryCollectionViewCell.swift; sourceTree = "<group>"; };
 		3A7C1CBD2B83D16400E70D1E /* DetailInfoBottomCollectionCellT.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailInfoBottomCollectionCellT.swift; sourceTree = "<group>"; };
@@ -109,7 +109,7 @@
 		3ABC13212B84B29E007DED14 /* String.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = String.swift; sourceTree = "<group>"; };
 		3ABC13232B84B4D8007DED14 /* CommentsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommentsView.swift; sourceTree = "<group>"; };
 		3AC7B6DE2B822EEC00786BD0 /* UILabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UILabel.swift; sourceTree = "<group>"; };
-		3AEC94B42B7F97A900F104B5 /* CustomPageControl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomPageControl.swift; sourceTree = "<group>"; };
+		3AEC94B42B7F97A900F104B5 /* CustomPageControlView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomPageControlView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -154,7 +154,6 @@
 				3A377B112B7BE47E00388D42 /* Resources */,
 				3A377B392B7BF1C300388D42 /* NetworkLayer */,
 				3A377B102B7BDF8700388D42 /* Extension */,
-				3AEC94B42B7F97A900F104B5 /* CustomPageControl.swift */,
 			);
 			path = NeoTour;
 			sourceTree = "<group>";
@@ -162,6 +161,7 @@
 		3A1E2F842B83914500BAF3EF /* SharedView */ = {
 			isa = PBXGroup;
 			children = (
+				3AEC94B42B7F97A900F104B5 /* CustomPageControlView.swift */,
 				3A1E2F852B83915600BAF3EF /* HeaderView.swift */,
 				3ABC13232B84B4D8007DED14 /* CommentsView.swift */,
 			);
@@ -214,7 +214,7 @@
 		3A377B0D2B7BDA3B00388D42 /* Model */ = {
 			isa = PBXGroup;
 			children = (
-				3A50B97A2B84E9970046BF68 /* TourModel.swift */,
+				3A50B97A2B84E9970046BF68 /* Tour.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -379,7 +379,7 @@
 				3A377B3B2B7BF20100388D42 /* networkService.swift in Sources */,
 				3AB2E1C22B81080D000540BF /* TourDetailViewModel.swift in Sources */,
 				3A6C59962B7E7BB4009C4C38 /* MainViewModel.swift in Sources */,
-				3A50B97B2B84E9970046BF68 /* TourModel.swift in Sources */,
+				3A50B97B2B84E9970046BF68 /* Tour.swift in Sources */,
 				3A377B0F2B7BDF7A00388D42 /* UIColor.swift in Sources */,
 				3A1E2F862B83915600BAF3EF /* HeaderView.swift in Sources */,
 				3ABC13202B84A00D007DED14 /* TourDetailsBottomCollectionCell.swift in Sources */,
@@ -399,7 +399,7 @@
 				3A50B9792B84E93C0046BF68 /* BookViewModel.swift in Sources */,
 				3A7C1CBE2B83D16400E70D1E /* DetailInfoBottomCollectionCellT.swift in Sources */,
 				3A1E2F8A2B839C1600BAF3EF /* DetailInfoTopCollectionCellT.swift in Sources */,
-				3AEC94B52B7F97A900F104B5 /* CustomPageControl.swift in Sources */,
+				3AEC94B52B7F97A900F104B5 /* CustomPageControlView.swift in Sources */,
 				3ABC131C2B849F8C007DED14 /* TourDetailsView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
