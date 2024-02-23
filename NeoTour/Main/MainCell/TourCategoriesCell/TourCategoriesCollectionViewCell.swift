@@ -10,7 +10,12 @@ import UIKit
 class TourCategoriesCollectionViewCell: UICollectionViewCell {
     static let id = "CarouselCollectionViewCell"
     
-
+    var viewModel: TourCategoriesCollectionViewCellViewModelProtocol! {
+        didSet {
+            segmentControl.text = viewModel.title
+        }
+    }
+    
     let segmentControl: UILabel = {
         let btn = UILabel()
         btn.backgroundColor = .clear
@@ -18,6 +23,7 @@ class TourCategoriesCollectionViewCell: UICollectionViewCell {
         btn.textAlignment = .center
         btn.textColor = .black
         btn.font = UIFont(name: "SFProDisplay-Regular", size: 16)
+        
         
         return btn
     }()
@@ -31,6 +37,8 @@ class TourCategoriesCollectionViewCell: UICollectionViewCell {
         
         return circleView
     }()
+    
+    
     
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -55,23 +63,11 @@ class TourCategoriesCollectionViewCell: UICollectionViewCell {
         
     }
     
-    func get(data: Categories) {
-        segmentControl.text = data.title
-    }
+//    func get(data: Categories) {
+//        segmentControl.text = data.title
+//    }
     
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
-    }
-    
-    
-    override func layoutSubviews() {
-        super.layoutSubviews()
-        
-        
-    }
-    
-    override func prepareForReuse() {
-        super.prepareForReuse()
-        
     }
 }

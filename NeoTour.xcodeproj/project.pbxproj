@@ -55,6 +55,12 @@
 		3ABC13222B84B29E007DED14 /* String.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3ABC13212B84B29E007DED14 /* String.swift */; };
 		3ABC13242B84B4D8007DED14 /* CommentsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3ABC13232B84B4D8007DED14 /* CommentsView.swift */; };
 		3AC7B6DF2B822EEC00786BD0 /* UILabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AC7B6DE2B822EEC00786BD0 /* UILabel.swift */; };
+		3AE9C8DB2B89129F00B335C5 /* TourCategoriesCollectionViewCellViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AE9C8DA2B89129F00B335C5 /* TourCategoriesCollectionViewCellViewModel.swift */; };
+		3AE9C8DD2B8912B700B335C5 /* GaleryCollectionViewCellViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AE9C8DC2B8912B700B335C5 /* GaleryCollectionViewCellViewModel.swift */; };
+		3AE9C8E02B8917EA00B335C5 /* RecommendedCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AE9C8DF2B8917EA00B335C5 /* RecommendedCollectionViewCell.swift */; };
+		3AE9C8E22B8917FD00B335C5 /* RecommendedCollectionViewCellViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AE9C8E12B8917FD00B335C5 /* RecommendedCollectionViewCellViewModel.swift */; };
+		3AE9C8E42B891FC800B335C5 /* TourDetailsTopTableViewCellViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AE9C8E32B891FC800B335C5 /* TourDetailsTopTableViewCellViewModel.swift */; };
+		3AE9C8E62B891FD600B335C5 /* TourDetailsBottomCollectionCellViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AE9C8E52B891FD600B335C5 /* TourDetailsBottomCollectionCellViewModel.swift */; };
 		3AEC94B52B7F97A900F104B5 /* CustomPageControlView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AEC94B42B7F97A900F104B5 /* CustomPageControlView.swift */; };
 /* End PBXBuildFile section */
 
@@ -109,6 +115,12 @@
 		3ABC13212B84B29E007DED14 /* String.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = String.swift; sourceTree = "<group>"; };
 		3ABC13232B84B4D8007DED14 /* CommentsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommentsView.swift; sourceTree = "<group>"; };
 		3AC7B6DE2B822EEC00786BD0 /* UILabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UILabel.swift; sourceTree = "<group>"; };
+		3AE9C8DA2B89129F00B335C5 /* TourCategoriesCollectionViewCellViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TourCategoriesCollectionViewCellViewModel.swift; sourceTree = "<group>"; };
+		3AE9C8DC2B8912B700B335C5 /* GaleryCollectionViewCellViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GaleryCollectionViewCellViewModel.swift; sourceTree = "<group>"; };
+		3AE9C8DF2B8917EA00B335C5 /* RecommendedCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecommendedCollectionViewCell.swift; sourceTree = "<group>"; };
+		3AE9C8E12B8917FD00B335C5 /* RecommendedCollectionViewCellViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecommendedCollectionViewCellViewModel.swift; sourceTree = "<group>"; };
+		3AE9C8E32B891FC800B335C5 /* TourDetailsTopTableViewCellViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TourDetailsTopTableViewCellViewModel.swift; sourceTree = "<group>"; };
+		3AE9C8E52B891FD600B335C5 /* TourDetailsBottomCollectionCellViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TourDetailsBottomCollectionCellViewModel.swift; sourceTree = "<group>"; };
 		3AEC94B42B7F97A900F104B5 /* CustomPageControlView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomPageControlView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -142,12 +154,14 @@
 		3A05B8CB2B7A7F3C00C9CB8A /* NeoTour */ = {
 			isa = PBXGroup;
 			children = (
+				3AE9C8D22B8910FD00B335C5 /* Onboarding */,
+				3AE9C8D32B89110000B335C5 /* Main */,
+				3AE9C8D42B89110200B335C5 /* TourDetails */,
+				3AE9C8D52B89110400B335C5 /* Book */,
 				3ABC13252B84E50C007DED14 /* Trash */,
 				3A1E2F842B83914500BAF3EF /* SharedView */,
 				3A24B9DB2B7CB2010031687A /* CollectionViewCell */,
 				3A377B0A2B7BD6E700388D42 /* App */,
-				3A377B082B7BD6CA00388D42 /* View */,
-				3A377B092B7BD6D300388D42 /* ViewModel */,
 				3A377B0D2B7BDA3B00388D42 /* Model */,
 				3A05B8D52B7A7F3D00C9CB8A /* Assets.xcassets */,
 				3A05B8D72B7A7F3D00C9CB8A /* LaunchScreen.storyboard */,
@@ -171,34 +185,8 @@
 		3A24B9DB2B7CB2010031687A /* CollectionViewCell */ = {
 			isa = PBXGroup;
 			children = (
-				3A24B9DC2B7CB2A90031687A /* TourCategoriesCollectionViewCell.swift */,
-				3A6C59972B7E7CC5009C4C38 /* GaleryCollectionViewCell.swift */,
-				3ABC131D2B84A001007DED14 /* TourDetailsTopTableViewCell.swift */,
-				3ABC131F2B84A00D007DED14 /* TourDetailsBottomCollectionCell.swift */,
 			);
 			path = CollectionViewCell;
-			sourceTree = "<group>";
-		};
-		3A377B082B7BD6CA00388D42 /* View */ = {
-			isa = PBXGroup;
-			children = (
-				3A05B8D02B7A7F3C00C9CB8A /* OnboardingView.swift */,
-				3A1E2F822B834E1600BAF3EF /* MainView.swift */,
-				3ABC131B2B849F8C007DED14 /* TourDetailsView.swift */,
-				3A50B9762B84E9300046BF68 /* BookView.swift */,
-			);
-			path = View;
-			sourceTree = "<group>";
-		};
-		3A377B092B7BD6D300388D42 /* ViewModel */ = {
-			isa = PBXGroup;
-			children = (
-				3A377B062B7BD6BB00388D42 /* OnboardingViewModel.swift */,
-				3A6C59952B7E7BB4009C4C38 /* MainViewModel.swift */,
-				3AB2E1C12B81080D000540BF /* TourDetailViewModel.swift */,
-				3A50B9782B84E93C0046BF68 /* BookViewModel.swift */,
-			);
-			path = ViewModel;
 			sourceTree = "<group>";
 		};
 		3A377B0A2B7BD6E700388D42 /* App */ = {
@@ -282,6 +270,108 @@
 				3A1E2F872B839A4200BAF3EF /* 2ExampleDetailViewControllerT.swift */,
 			);
 			path = Trash;
+			sourceTree = "<group>";
+		};
+		3AE9C8D22B8910FD00B335C5 /* Onboarding */ = {
+			isa = PBXGroup;
+			children = (
+				3A377B062B7BD6BB00388D42 /* OnboardingViewModel.swift */,
+				3A05B8D02B7A7F3C00C9CB8A /* OnboardingView.swift */,
+			);
+			path = Onboarding;
+			sourceTree = "<group>";
+		};
+		3AE9C8D32B89110000B335C5 /* Main */ = {
+			isa = PBXGroup;
+			children = (
+				3AE9C8D62B89117300B335C5 /* MainCell */,
+				3A6C59952B7E7BB4009C4C38 /* MainViewModel.swift */,
+				3A1E2F822B834E1600BAF3EF /* MainView.swift */,
+			);
+			path = Main;
+			sourceTree = "<group>";
+		};
+		3AE9C8D42B89110200B335C5 /* TourDetails */ = {
+			isa = PBXGroup;
+			children = (
+				3AE9C8D72B89119300B335C5 /* TourDetailsCell */,
+				3ABC131B2B849F8C007DED14 /* TourDetailsView.swift */,
+				3AB2E1C12B81080D000540BF /* TourDetailViewModel.swift */,
+			);
+			path = TourDetails;
+			sourceTree = "<group>";
+		};
+		3AE9C8D52B89110400B335C5 /* Book */ = {
+			isa = PBXGroup;
+			children = (
+				3A50B9762B84E9300046BF68 /* BookView.swift */,
+				3A50B9782B84E93C0046BF68 /* BookViewModel.swift */,
+			);
+			path = Book;
+			sourceTree = "<group>";
+		};
+		3AE9C8D62B89117300B335C5 /* MainCell */ = {
+			isa = PBXGroup;
+			children = (
+				3AE9C8DE2B8917AE00B335C5 /* RecommendedCell */,
+				3AE9C8D82B89124900B335C5 /* TourCategoriesCell */,
+				3AE9C8D92B89125700B335C5 /* GaleryCell */,
+			);
+			path = MainCell;
+			sourceTree = "<group>";
+		};
+		3AE9C8D72B89119300B335C5 /* TourDetailsCell */ = {
+			isa = PBXGroup;
+			children = (
+				3AE9C8E72B891FDA00B335C5 /* TourDetailsTopCell */,
+				3AE9C8E82B891FF500B335C5 /* TourDetailsBottomCell */,
+			);
+			path = TourDetailsCell;
+			sourceTree = "<group>";
+		};
+		3AE9C8D82B89124900B335C5 /* TourCategoriesCell */ = {
+			isa = PBXGroup;
+			children = (
+				3A24B9DC2B7CB2A90031687A /* TourCategoriesCollectionViewCell.swift */,
+				3AE9C8DA2B89129F00B335C5 /* TourCategoriesCollectionViewCellViewModel.swift */,
+			);
+			path = TourCategoriesCell;
+			sourceTree = "<group>";
+		};
+		3AE9C8D92B89125700B335C5 /* GaleryCell */ = {
+			isa = PBXGroup;
+			children = (
+				3AE9C8DC2B8912B700B335C5 /* GaleryCollectionViewCellViewModel.swift */,
+				3A6C59972B7E7CC5009C4C38 /* GaleryCollectionViewCell.swift */,
+			);
+			path = GaleryCell;
+			sourceTree = "<group>";
+		};
+		3AE9C8DE2B8917AE00B335C5 /* RecommendedCell */ = {
+			isa = PBXGroup;
+			children = (
+				3AE9C8DF2B8917EA00B335C5 /* RecommendedCollectionViewCell.swift */,
+				3AE9C8E12B8917FD00B335C5 /* RecommendedCollectionViewCellViewModel.swift */,
+			);
+			path = RecommendedCell;
+			sourceTree = "<group>";
+		};
+		3AE9C8E72B891FDA00B335C5 /* TourDetailsTopCell */ = {
+			isa = PBXGroup;
+			children = (
+				3ABC131D2B84A001007DED14 /* TourDetailsTopTableViewCell.swift */,
+				3AE9C8E32B891FC800B335C5 /* TourDetailsTopTableViewCellViewModel.swift */,
+			);
+			path = TourDetailsTopCell;
+			sourceTree = "<group>";
+		};
+		3AE9C8E82B891FF500B335C5 /* TourDetailsBottomCell */ = {
+			isa = PBXGroup;
+			children = (
+				3ABC131F2B84A00D007DED14 /* TourDetailsBottomCollectionCell.swift */,
+				3AE9C8E52B891FD600B335C5 /* TourDetailsBottomCollectionCellViewModel.swift */,
+			);
+			path = TourDetailsBottomCell;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -378,11 +468,16 @@
 				3A24B9DA2B7CA6CD0031687A /* MainViewT.swift in Sources */,
 				3A377B3B2B7BF20100388D42 /* networkService.swift in Sources */,
 				3AB2E1C22B81080D000540BF /* TourDetailViewModel.swift in Sources */,
+				3AE9C8DD2B8912B700B335C5 /* GaleryCollectionViewCellViewModel.swift in Sources */,
 				3A6C59962B7E7BB4009C4C38 /* MainViewModel.swift in Sources */,
+				3AE9C8E22B8917FD00B335C5 /* RecommendedCollectionViewCellViewModel.swift in Sources */,
+				3AE9C8E02B8917EA00B335C5 /* RecommendedCollectionViewCell.swift in Sources */,
 				3A50B97B2B84E9970046BF68 /* Tour.swift in Sources */,
+				3AE9C8E42B891FC800B335C5 /* TourDetailsTopTableViewCellViewModel.swift in Sources */,
 				3A377B0F2B7BDF7A00388D42 /* UIColor.swift in Sources */,
 				3A1E2F862B83915600BAF3EF /* HeaderView.swift in Sources */,
 				3ABC13202B84A00D007DED14 /* TourDetailsBottomCollectionCell.swift in Sources */,
+				3AE9C8DB2B89129F00B335C5 /* TourCategoriesCollectionViewCellViewModel.swift in Sources */,
 				3AC7B6DF2B822EEC00786BD0 /* UILabel.swift in Sources */,
 				3A24B9DD2B7CB2A90031687A /* TourCategoriesCollectionViewCell.swift in Sources */,
 				3A1E2F832B834E1600BAF3EF /* MainView.swift in Sources */,
@@ -394,6 +489,7 @@
 				3A50B9772B84E9300046BF68 /* BookView.swift in Sources */,
 				3A6C59982B7E7CC5009C4C38 /* GaleryCollectionViewCell.swift in Sources */,
 				3A1E2F812B82A63500BAF3EF /* ExampleViewControllerT.swift in Sources */,
+				3AE9C8E62B891FD600B335C5 /* TourDetailsBottomCollectionCellViewModel.swift in Sources */,
 				3A377B072B7BD6BB00388D42 /* OnboardingViewModel.swift in Sources */,
 				3A24B9DF2B7CB47A0031687A /* MockFiles.swift in Sources */,
 				3A50B9792B84E93C0046BF68 /* BookViewModel.swift in Sources */,

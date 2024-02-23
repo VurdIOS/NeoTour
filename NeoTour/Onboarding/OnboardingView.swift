@@ -9,8 +9,14 @@ import UIKit
 
 class OnboardingView: UIViewController {
     
+    var viewModel: OnboardinViewModelProtocol! {
+        didSet {
+            mainImage.image = viewModel.image
+        }
+    }
+    
     private let mainImage: UIImageView = {
-        let imageView = UIImageView(image: UIImage(named: "testImage"))
+        let imageView = UIImageView()
         imageView.clipsToBounds = true
         imageView.translatesAutoresizingMaskIntoConstraints = false
         imageView.layer.maskedCorners = [.layerMinXMaxYCorner, .layerMaxXMaxYCorner]
@@ -65,6 +71,7 @@ class OnboardingView: UIViewController {
         view.backgroundColor = .white
         setupConstraints()
         setupTargetAction()
+        viewModel = OnboardingViewModel()
     }
     
     override func viewDidLayoutSubviews() {
@@ -109,6 +116,7 @@ class OnboardingView: UIViewController {
     
     @objc func goButtonTapped() {
         let vc = MainView()
+        vc.viewModel = viewModel.getDataForMainView()
         navigationController?.pushViewController(vc, animated: true)
         
     }

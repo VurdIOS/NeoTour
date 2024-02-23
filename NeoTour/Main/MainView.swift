@@ -24,7 +24,9 @@ class MainView: UIViewController {
         case recommended(Tour)
     }
     
-    let mock = MockFiles()
+//    let mock = MockFiles()
+    
+    var viewModel: MainViewModelProtocol!
     
     private var dataSource: UICollectionViewDiffableDataSource<Section, Item>!
     
@@ -40,8 +42,8 @@ class MainView: UIViewController {
         )
         collectionView.register(HeaderView.self, forSupplementaryViewOfKind: MainView.sectionHeaderElementKind, withReuseIdentifier: HeaderView.reuseIdentifier)
         collectionView.register(
-            GaleryCollectionViewCell.self,
-            forCellWithReuseIdentifier: GaleryCollectionViewCell.id
+            RecommendedCollectionViewCell.self,
+            forCellWithReuseIdentifier: RecommendedCollectionViewCell.id
         )
         collectionView.translatesAutoresizingMaskIntoConstraints = false
         collectionView.indicatorStyle = .black
@@ -184,7 +186,7 @@ class MainView: UIViewController {
                 ) as? TourCategoriesCollectionViewCell else {
                     fatalError("Failed to dequeue a cell of type CarouselCollectionViewCell")
                 }
-                cell.get(data: data)
+                cell.viewModel = self.viewModel.getDataForCategoriesCell(categories: data)
                 return cell
             case .galeryTour:
                 guard case let .galery(data) = item else {
@@ -194,18 +196,17 @@ class MainView: UIViewController {
                   withReuseIdentifier: GaleryCollectionViewCell.id,
                   for: indexPath
                 ) as! GaleryCollectionViewCell
-                cell.get(label: data.title, image: data.image)
+                cell.viewModel = self.viewModel.getDataForGaleryCell(tour: data)
                 return cell
             case .recommendedTour:
                 guard case let .recommended(data) = item else {
                                 fatalError("Invalid item type for carouselTour section")
                             }
                 let cell = collectionView.dequeueReusableCell(
-                    withReuseIdentifier: GaleryCollectionViewCell.id,
+                    withReuseIdentifier: RecommendedCollectionViewCell.id,
                     for: indexPath
-                ) as! GaleryCollectionViewCell
-                cell.get(label: data.title, image: data.image)
-                cell.setupCell(labelFont: UIFont(name: "SFProDisplay-Semibold", size: 14)!, cornerRadius: 10, labelLeadingConstant: 12)
+                ) as! RecommendedCollectionViewCell
+                cell.viewModel = self.viewModel.getDataForRecommendedCell(tour: data)
                 return cell
             }
             
@@ -234,13 +235,13 @@ class MainView: UIViewController {
         snapshot.appendSections([.carouselTour, .galeryTour, .recommendedTour])
 
         // Добавление элементов для каждой секции
-        let carouselItems = mock.mock.categories // Пример данных для секции "carouselTour"
+        let carouselItems = viewModel.categories // Пример данных для секции "carouselTour"
         snapshot.appendItems(carouselItems.map { Item.carousel($0) }, toSection: .carouselTour)
 
-        let galeryItems: [Tour] = mock.mock.toursForGalery
+        let galeryItems: [Tour] = viewModel.toursForGalery
         snapshot.appendItems(galeryItems.map { Item.galery($0) }, toSection: .galeryTour)
 
-        let recommendedItems: [Tour] = mock.mock.toursForReccomended
+        let recommendedItems: [Tour] = viewModel.toursForRecommended
         snapshot.appendItems(recommendedItems.map { Item.recommended($0) }, toSection: .recommendedTour)
 
         // Применение снимка к источнику данных
@@ -270,13 +271,13 @@ extension MainView: UICollectionViewDelegate {
                 case .galeryTour:
                     if case let .galery(data) = item {
                         let vc = TourDetailsView()
-                        vc.tour = data
+                        vc.viewModel = viewModel.getDataForDetailView(tour: data)
                         navigationController?.pushViewController(vc, animated: true)
                     }
                 case .recommendedTour:
                     if case let .recommended(data) = item {
                         let vc = TourDetailsView()
-                        vc.tour = data
+                        vc.viewModel = viewModel.getDataForDetailView(tour: data)
                         navigationController?.pushViewController(vc, animated: true)
                     }
                 }

@@ -11,7 +11,14 @@ class TourDetailsBottomCollectionCell: UITableViewCell {
     
     static let reuseIdentifier = "BottomTableViewCell"
     
-    var bookButtonTriger: (() -> Void)?
+    var viewModel: TourDetailsBottomCollectionCellViewModelProtocol! {
+        didSet {
+            tourNameLabel.text = viewModel.title
+            tourLocationLabel.text = viewModel.location
+            tourDescriptionLabel.attributedText = viewModel.description.createLine(spacing: 7)
+            configureComments()
+        }
+    }
     
     private lazy var tourNameLabel: UILabel = {
         let lbl = UILabel()
@@ -93,7 +100,7 @@ class TourDetailsBottomCollectionCell: UITableViewCell {
 
     }
     @objc func bookButtonTapped() {
-        bookButtonTriger!()
+
     }
     
        private func setupLayout() {
@@ -144,17 +151,14 @@ class TourDetailsBottomCollectionCell: UITableViewCell {
            ])
        }
        
-       func configure(tour: Tour) {
-           tourNameLabel.text = tour.title
-           tourLocationLabel.attributedText = NSAttributedString(string: tour.title)
-           tourDescriptionLabel.attributedText = tour.description.createLine(spacing: 7)
+       func configureComments() {
            // Очищаем стек от предыдущих отзывов
            reviewsStackView.arrangedSubviews.forEach {
                reviewsStackView.removeArrangedSubview($0)
                $0.removeFromSuperview()
            }
            // Добавляем новые отзывы
-           for review in tour.comments {
+           for review in viewModel.comments {
                let reviewLabel = CommentsView(configuration: review)
                reviewsStackView.addArrangedSubview(reviewLabel)
            }

@@ -10,6 +10,12 @@ import UIKit
 class TourDetailsTopCollectionCell: UITableViewCell {
     static let reuseIdentifier = "topTableViewCell"
     
+    var viewModel: TourDetailsTopTableViewCellViewModelProtocol! {
+        didSet {
+            pictureImageView.image = viewModel.image
+        }
+    }
+    
     let pictureImageView: UIImageView = {
         let imageView = UIImageView()
         imageView.contentMode = .scaleAspectFill

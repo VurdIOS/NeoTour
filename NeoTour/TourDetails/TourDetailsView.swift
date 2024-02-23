@@ -9,12 +9,8 @@ import UIKit
 
 class TourDetailsView: UIViewController {
     
-    var tour: Tour!
-    var viewModel: TourDetailViewModelProtocol! {
-        didSet {
-            
-        }
-    }
+//    var tour: Tour!
+    var viewModel: TourDetailViewModelProtocol!
 
     private let tableView: UITableView = {
         let tableView = UITableView()
@@ -27,7 +23,6 @@ class TourDetailsView: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        viewModel = TourDetailViewModel(tour: tour)
         view.addSubview(tableView)
         tableView.frame = view.bounds
         tableView.dataSource = self
@@ -47,17 +42,17 @@ extension TourDetailsView: UITableViewDataSource {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         if indexPath.row == 0 {
             let cell = tableView.dequeueReusableCell(withIdentifier: TourDetailsTopCollectionCell.reuseIdentifier, for: indexPath) as! TourDetailsTopCollectionCell
-            cell.pictureImageView.image = tour.image
+            cell.viewModel = viewModel.getDataForTopCell()
             return cell
         } else {
             // Ячейка с текстом и отзывами
             let cell = tableView.dequeueReusableCell(withIdentifier: TourDetailsBottomCollectionCell.reuseIdentifier, for: indexPath) as! TourDetailsBottomCollectionCell
             // Тут должен быть твой кастомный код для настройки внешнего вида ячейки с текстом и отзывами
-            cell.configure(tour: tour)
+            cell.viewModel = viewModel.getDataForBottomCell()
             cell.selectionStyle = .none
-            cell.bookButtonTriger = {
-                // тут сетить кнопку
-            }
+//            cell.bookButtonTriger = {
+//                // тут сетить кнопку
+//            }
             return cell
         }
     }
