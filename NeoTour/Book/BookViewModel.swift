@@ -6,3 +6,16 @@
 //
 
 import Foundation
+
+protocol BookViewModelProtocol {
+    init(tour: Tour)
+}
+
+class BookViewModel: BookViewModelProtocol {
+    
+    private var tour: Tour!
+    
+    required init(tour: Tour) {
+        self.tour = tour
+    }
+}

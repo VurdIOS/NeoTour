@@ -11,6 +11,13 @@ class TourDetailsView: UIViewController {
     
 //    var tour: Tour!
     var viewModel: TourDetailViewModelProtocol!
+    
+    private lazy var blackView: UIView = {
+        let view = UIView(frame: view.bounds)
+        view.backgroundColor = UIColor(white: 0, alpha: 0.5)
+        view.isHidden = true
+        return view
+    }()
 
     private let tableView: UITableView = {
         let tableView = UITableView()
@@ -24,9 +31,15 @@ class TourDetailsView: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         view.addSubview(tableView)
+        view.addSubview(blackView)
         tableView.frame = view.bounds
         tableView.dataSource = self
         tableView.delegate = self
+    }
+    
+    private func blackOutView() {
+        blackView.isHidden.toggle()
+
     }
 
 
@@ -50,9 +63,7 @@ extension TourDetailsView: UITableViewDataSource {
             // Тут должен быть твой кастомный код для настройки внешнего вида ячейки с текстом и отзывами
             cell.viewModel = viewModel.getDataForBottomCell()
             cell.selectionStyle = .none
-//            cell.bookButtonTriger = {
-//                // тут сетить кнопку
-//            }
+            cell.delegate = self
             return cell
         }
     }
@@ -77,5 +88,27 @@ extension TourDetailsView: UITableViewDelegate {
         if indexPath.row == 1 {
             cell.layer.zPosition = 1
         }
+    }
+}
+
+extension TourDetailsView: BookButtonDelegate {
+    func bookButtonDidTap() {
+        let vc = BookView()
+        vc.viewModel = viewModel.getDataForBookView()
+        vc.modalPresentationStyle = .custom
+        vc.transitioningDelegate = self
+//        blackOutView()
+        present(vc, animated: true)
+    }
+    
+    
+}
+
+extension TourDetailsView: UIViewControllerTransitioningDelegate {
+    func presentationController(forPresented presented: UIViewController, presenting: UIViewController?, source: UIViewController) -> UIPresentationController? {
+        let presentationController = PartialSizePresentationController(presentedViewController: presented, presenting: presenting)
+        // Здесь ты можешь настроить высоту, если хочешь
+        presentationController.presentedHeight = 505 // например
+        return presentationController
     }
 }

@@ -11,39 +11,15 @@
 import UIKit
 
 protocol TourDetailViewModelProtocol {
-//    var tourImage: UIImage { get }
-//    var tourName: String { get }
-//    var tourLocation: String { get }
-//    var tourDescription: String { get }
-//    var tourComments: [Comments] { get }
     func getDataForTopCell() -> TourDetailsTopTableViewCellViewModelProtocol
     func getDataForBottomCell() -> TourDetailsBottomCollectionCellViewModelProtocol
+    func getDataForBookView() -> BookViewModelProtocol
     
     init(tour: Tour)
 }
 class TourDetailViewModel: TourDetailViewModelProtocol {
 
     private var tour: Tour
-//    
-//    var tourImage: UIImage {
-//        tour.image
-//    }
-//    
-//    var tourName: String {
-//        tour.title
-//    }
-//    
-//    var tourLocation: String {
-//        tour.location
-//    }
-//    
-//    var tourDescription: String {
-//        tour.description
-//    }
-//    
-//    var tourComments: [Comments] {
-//        tour.comments
-//    }
     
     func getDataForTopCell() -> TourDetailsTopTableViewCellViewModelProtocol {
         TourDetailsTopTableViewCellViewModel(image: tour.image)
@@ -51,6 +27,9 @@ class TourDetailViewModel: TourDetailViewModelProtocol {
     
     func getDataForBottomCell() -> TourDetailsBottomCollectionCellViewModelProtocol {
         TourDetailsBottomCollectionCellViewModel(tour: tour)
+    }
+    func getDataForBookView() -> BookViewModelProtocol {
+        BookViewModel(tour: tour)
     }
     
     

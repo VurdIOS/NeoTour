@@ -44,6 +44,7 @@
 		3A50B9772B84E9300046BF68 /* BookView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A50B9762B84E9300046BF68 /* BookView.swift */; };
 		3A50B9792B84E93C0046BF68 /* BookViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A50B9782B84E93C0046BF68 /* BookViewModel.swift */; };
 		3A50B97B2B84E9970046BF68 /* Tour.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A50B97A2B84E9970046BF68 /* Tour.swift */; };
+		3A5515E72B89F2100027C1AC /* UIPresentationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A5515E62B89F2100027C1AC /* UIPresentationController.swift */; };
 		3A6C59962B7E7BB4009C4C38 /* MainViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A6C59952B7E7BB4009C4C38 /* MainViewModel.swift */; };
 		3A6C59982B7E7CC5009C4C38 /* GaleryCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A6C59972B7E7CC5009C4C38 /* GaleryCollectionViewCell.swift */; };
 		3A7C1CBE2B83D16400E70D1E /* DetailInfoBottomCollectionCellT.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A7C1CBD2B83D16400E70D1E /* DetailInfoBottomCollectionCellT.swift */; };
@@ -104,6 +105,7 @@
 		3A50B9762B84E9300046BF68 /* BookView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookView.swift; sourceTree = "<group>"; };
 		3A50B9782B84E93C0046BF68 /* BookViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookViewModel.swift; sourceTree = "<group>"; };
 		3A50B97A2B84E9970046BF68 /* Tour.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Tour.swift; sourceTree = "<group>"; };
+		3A5515E62B89F2100027C1AC /* UIPresentationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIPresentationController.swift; sourceTree = "<group>"; };
 		3A6C59952B7E7BB4009C4C38 /* MainViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewModel.swift; sourceTree = "<group>"; };
 		3A6C59972B7E7CC5009C4C38 /* GaleryCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GaleryCollectionViewCell.swift; sourceTree = "<group>"; };
 		3A7C1CBD2B83D16400E70D1E /* DetailInfoBottomCollectionCellT.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailInfoBottomCollectionCellT.swift; sourceTree = "<group>"; };
@@ -213,6 +215,7 @@
 				3A377B0E2B7BDF7A00388D42 /* UIColor.swift */,
 				3AC7B6DE2B822EEC00786BD0 /* UILabel.swift */,
 				3ABC13212B84B29E007DED14 /* String.swift */,
+				3A5515E62B89F2100027C1AC /* UIPresentationController.swift */,
 			);
 			path = Extension;
 			sourceTree = "<group>";
@@ -465,6 +468,7 @@
 				3A05B8D12B7A7F3C00C9CB8A /* OnboardingView.swift in Sources */,
 				3A1E2F882B839A4200BAF3EF /* 2ExampleDetailViewControllerT.swift in Sources */,
 				3ABC13242B84B4D8007DED14 /* CommentsView.swift in Sources */,
+				3A5515E72B89F2100027C1AC /* UIPresentationController.swift in Sources */,
 				3A24B9DA2B7CA6CD0031687A /* MainViewT.swift in Sources */,
 				3A377B3B2B7BF20100388D42 /* networkService.swift in Sources */,
 				3AB2E1C22B81080D000540BF /* TourDetailViewModel.swift in Sources */,

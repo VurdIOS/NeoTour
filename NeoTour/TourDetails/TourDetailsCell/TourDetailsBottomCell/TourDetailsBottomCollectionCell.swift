@@ -6,8 +6,13 @@
 //
 
 import UIKit
+protocol BookButtonDelegate: AnyObject {
+    func bookButtonDidTap()
+}
 
 class TourDetailsBottomCollectionCell: UITableViewCell {
+    
+    var delegate: BookButtonDelegate?
     
     static let reuseIdentifier = "BottomTableViewCell"
     
@@ -99,7 +104,13 @@ class TourDetailsBottomCollectionCell: UITableViewCell {
         contentView.frame = contentView.frame.inset(by: UIEdgeInsets(top: -offset, left: 0, bottom: 0, right: 0))
 
     }
+    
     @objc func bookButtonTapped() {
+//        let vc = BookView()
+//        vc.viewModel = viewModel.getDataForBookView()
+//        vc.modalPresentationStyle = .formSheet // или .pageSheet
+//        self.present(vc, animated: true)
+        delegate?.bookButtonDidTap()
 
     }
     

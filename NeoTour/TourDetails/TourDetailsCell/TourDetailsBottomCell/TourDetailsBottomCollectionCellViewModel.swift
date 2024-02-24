@@ -32,6 +32,7 @@ class TourDetailsBottomCollectionCellViewModel: TourDetailsBottomCollectionCellV
     }
     
     private let tour: Tour
+
     
     
     required init(tour: Tour) {
