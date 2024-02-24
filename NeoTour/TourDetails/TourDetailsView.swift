@@ -41,6 +41,13 @@ class TourDetailsView: UIViewController {
         blackView.isHidden.toggle()
 
     }
+    
+   private func showAlert() {
+        let alertVC = AlertViewController()
+        alertVC.modalPresentationStyle = .overCurrentContext
+        alertVC.modalTransitionStyle = .crossDissolve
+        present(alertVC, animated: true)
+    }
 
 
 }
@@ -97,7 +104,10 @@ extension TourDetailsView: BookButtonDelegate {
         vc.viewModel = viewModel.getDataForBookView()
         vc.modalPresentationStyle = .custom
         vc.transitioningDelegate = self
-//        blackOutView()
+        vc.onDismiss = { [weak self] in
+            self?.showAlert()
+            
+        }
         present(vc, animated: true)
     }
     
@@ -112,3 +122,4 @@ extension TourDetailsView: UIViewControllerTransitioningDelegate {
         return presentationController
     }
 }
+

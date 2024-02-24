@@ -7,9 +7,23 @@
 
 import UIKit
 
-class BookView: UIViewController {
+protocol BookViewDelegate: AnyObject {
+    func showAlert()
+}
+
+class BookView: UIViewController{
     
-    var viewModel: BookViewModelProtocol!
+    var delegate: BookViewDelegate?
+    var onDismiss: (() -> Void)?
+    
+    var viewModel: BookViewModelProtocol! {
+        didSet {
+            viewModel.viewModelDidChange = {[unowned self] viewModel in
+                self.numberLabel.text = "\(viewModel.peopleCounter) people"
+                self.counterLabel.text = viewModel.peopleCounter
+            }
+        }
+    }
     
     let infoTitleLabel: UILabel = {
         let label = UILabel()
@@ -17,7 +31,7 @@ class BookView: UIViewController {
         label.textAlignment = .left
         label.font = UIFont(name: "SFProDisplay-Bold", size: 24)
         label.translatesAutoresizingMaskIntoConstraints = false
-
+        
         return label
     }()
     
@@ -28,16 +42,16 @@ class BookView: UIViewController {
         label.textAlignment = .left
         label.translatesAutoresizingMaskIntoConstraints = false
         label.font = UIFont(name: "SFProDisplay-Regular", size: 14)
-
+        
         return label
     }()
     
     let closeButton: UIButton = {
         let button = UIButton()
         button.setImage(UIImage(named: "Xcross"), for: .normal)
-         button.translatesAutoresizingMaskIntoConstraints = false
-         return button
-     }()
+        button.translatesAutoresizingMaskIntoConstraints = false
+        return button
+    }()
     
     let phoneNumberTitle: UILabel = {
         let label = UILabel()
@@ -46,15 +60,15 @@ class BookView: UIViewController {
         label.font = UIFont(name: "SFProDisplay-Regular", size: 14)
         label.textColor = UIColor(red: 136/255, green: 136/255, blue: 136/255, alpha: 1)
         label.translatesAutoresizingMaskIntoConstraints = false
-
+        
         return label
     }()
-
+    
     var phoneNumberField: UITextField = {
         let field = UITextField()
-        field.placeholder = ""
         field.borderStyle = .roundedRect
         field.keyboardType = .phonePad
+        field.text = "+996"
         field.layer.cornerRadius = 25
         field.layer.borderWidth = 1 // если нужна граница
         field.layer.borderColor = UIColor.gray.cgColor
@@ -69,7 +83,7 @@ class BookView: UIViewController {
         label.font = UIFont(name: "SFProDisplay-Regular", size: 14)
         label.textColor = UIColor(red: 136/255, green: 136/255, blue: 136/255, alpha: 1)
         label.translatesAutoresizingMaskIntoConstraints = false
-
+        
         return label
     }()
     var commentField: UITextField = {
@@ -84,10 +98,10 @@ class BookView: UIViewController {
     }()
     let numberLabel: UILabel = {
         let label = UILabel()
-        label.text = "5 People"
+        label.text = "1 People"
         label.textAlignment = .center
         label.translatesAutoresizingMaskIntoConstraints = false
-
+        
         return label
     }()
     
@@ -98,23 +112,23 @@ class BookView: UIViewController {
         label.font = UIFont(name: "SFProDisplay-Regular", size: 14)
         label.textColor = UIColor(red: 136/255, green: 136/255, blue: 136/255, alpha: 1)
         label.translatesAutoresizingMaskIntoConstraints = false
-
+        
         return label
     }()
     
     let counterLabel: UILabel = {
         let label = UILabel()
-        label.text = "0"
-        label.textAlignment = .left
+        label.text = "1"
+        label.textAlignment = .center
         label.font = UIFont(name: "SFProDisplay-Black", size: 16)
         label.textColor = .black
         label.translatesAutoresizingMaskIntoConstraints = false
-
+        
         return label
     }()
     
     let minusButton: UIButton = {
-       let button = UIButton()
+        let button = UIButton()
         button.setTitle("-", for: .normal)
         button.setTitleColor(.white, for: .normal)
         button.backgroundColor = .accentColor
@@ -129,8 +143,8 @@ class BookView: UIViewController {
         button.backgroundColor = .accentColor
         button.layer.cornerRadius = 15
         button.translatesAutoresizingMaskIntoConstraints = false
-         return button
-     }()
+        return button
+    }()
     let submitButton: UIButton = {
         let button = UIButton()
         button.setTitle("Submit", for: .normal)
@@ -138,19 +152,42 @@ class BookView: UIViewController {
         button.setTitleColor(.white, for: .normal)
         button.backgroundColor = .accentColor
         button.layer.cornerRadius = 25
+        button.isEnabled = false
         button.translatesAutoresizingMaskIntoConstraints = false
-         return button
-     }()
+        return button
+    }()
+    
+    let flagButton = UIButton()
+    
+    let countries = [Country(flag: UIImage(named: "KG")!, code: "KG"), Country(flag: UIImage(named: "KG")!, code: "KZ"),Country(flag: UIImage(named: "KG")!, code: "RU")]
     
     override func viewDidLoad() {
         super.viewDidLoad()
         setupUI()
         setupConstraints()
+        setupTextField()
+        setupTargetsForButtons()
         
+    }
+    func setupTextField() {
+        phoneNumberField.delegate = self
+        
+        flagButton.setImage(UIImage(named: "KG"), for: .normal) // Замените на ваше изображение флага
+        
+        let leftViewForNumberField = UIView(frame: CGRect(x: 0, y: 0, width: 44, height: 44)) // Установите необходимые размеры
+        let leftViewForCommentsField = UIView(frame: CGRect(x: 0, y: 0, width: 20, height: 44)) // Установите необходимые размеры
+        
+        leftViewForNumberField.addSubview(flagButton)
+        flagButton.frame = leftViewForNumberField.bounds
+        
+        
+        phoneNumberField.leftView = leftViewForNumberField
+        phoneNumberField.leftViewMode = .always
+        commentField.leftView = leftViewForCommentsField
+        commentField.leftViewMode = .always
     }
     
     func setupUI() {
-        // Настройка фона и закругленных углов
         view.backgroundColor = .white
         view.layer.cornerRadius = 28
         view.clipsToBounds = true
@@ -170,7 +207,7 @@ class BookView: UIViewController {
         view.addSubview(minusButton)
         view.addSubview(plusButton)
         view.addSubview(submitButton)
- 
+        
         NSLayoutConstraint.activate([
             infoTitleLabel.topAnchor.constraint(equalTo: view.topAnchor, constant: 20),
             infoTitleLabel.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 20),
@@ -212,13 +249,15 @@ class BookView: UIViewController {
             
             counterLabel.centerYAnchor.constraint(equalTo: minusButton.centerYAnchor),
             counterLabel.leadingAnchor.constraint(equalTo: minusButton.trailingAnchor, constant: 10),
+            counterLabel.widthAnchor.constraint(equalToConstant: 30),
             
             plusButton.centerYAnchor.constraint(equalTo: counterLabel.centerYAnchor),
             plusButton.leadingAnchor.constraint(equalTo: counterLabel.trailingAnchor, constant: 10),
             
             numberLabel.centerYAnchor.constraint(equalTo: plusButton.centerYAnchor),
             numberLabel.leadingAnchor.constraint(equalTo: plusButton.trailingAnchor, constant: 20),
-           
+            numberLabel.widthAnchor.constraint(equalToConstant: 100),
+            
             
             submitButton.topAnchor.constraint(equalTo: numberLabel.bottomAnchor, constant: 50),
             submitButton.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 20),
@@ -226,4 +265,74 @@ class BookView: UIViewController {
             submitButton.heightAnchor.constraint(equalToConstant: 50)
         ])
     }
+    
+    private func setupTargetsForButtons() {
+        flagButton.addTarget(self, action: #selector(flagButtonTapped), for: .touchUpInside)
+        plusButton.addTarget(self, action: #selector(plusButtonTapped), for: .touchUpInside)
+        minusButton.addTarget(self, action: #selector(minusButtonTapped), for: .touchUpInside)
+        submitButton.addTarget(self, action: #selector(submitButtonTapped), for: .touchUpInside)
+    }
+
+    
+    @objc func flagButtonTapped(_ sender: UIButton) {
+        
+        let countryCodePickerVC = CountryCodePickerViewController()
+        countryCodePickerVC.modalPresentationStyle = .popover
+        countryCodePickerVC.preferredContentSize = CGSize(width: 250, height: 200) // Задайте размер popover
+        countryCodePickerVC.delegate = self
+        
+        if let popoverController = countryCodePickerVC.popoverPresentationController {
+            popoverController.sourceView = sender
+            popoverController.sourceRect = sender.bounds
+            popoverController.permittedArrowDirections = [.down, .up]
+            popoverController.delegate = self
+        }
+        
+        self.present(countryCodePickerVC, animated: true, completion: nil)
+    }
+    
+    @objc func plusButtonTapped() {
+        viewModel.plusButtonTapped()
+    }
+    
+    @objc func minusButtonTapped() {
+        viewModel.minusButtonTapped()
+    }
+    @objc func submitButtonTapped() {
+        dismiss(animated: true) {
+            self.onDismiss?()
+        }
+        
+        
+        
+
+    }
 }
+
+
+extension BookView: UITextFieldDelegate {
+    func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
+        let currentText = textField.text ?? ""
+        let newText = (currentText as NSString).replacingCharacters(in: range, with: string)
+        submitButton.isEnabled = newText.count >= 9 ? true : false
+
+        return true
+    }
+}
+
+extension BookView: CountryCodePickerDelegate {
+    func countryCodePicker(didSelectCountry country: Country) {
+        flagButton.setImage(country.flag, for: .normal)
+        phoneNumberField.text = country.code
+    }
+    
+    
+}
+
+extension BookView: UIPopoverPresentationControllerDelegate  {
+    func adaptivePresentationStyle(for controller: UIPresentationController) -> UIModalPresentationStyle {
+          return .none // Это гарантирует, что на iPhone popover не будет растягиваться на весь экран
+      }
+}
+
+
