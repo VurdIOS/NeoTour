@@ -185,6 +185,7 @@
 				3A1E2F852B83915600BAF3EF /* HeaderView.swift */,
 				3ABC13232B84B4D8007DED14 /* CommentsView.swift */,
 				3A5515EB2B8A30CD0027C1AC /* AlertView.swift */,
+				3A5515E62B89F2100027C1AC /* UIPresentationController.swift */,
 			);
 			path = SharedView;
 			sourceTree = "<group>";
@@ -220,7 +221,6 @@
 				3A377B0E2B7BDF7A00388D42 /* UIColor.swift */,
 				3AC7B6DE2B822EEC00786BD0 /* UILabel.swift */,
 				3ABC13212B84B29E007DED14 /* String.swift */,
-				3A5515E62B89F2100027C1AC /* UIPresentationController.swift */,
 			);
 			path = Extension;
 			sourceTree = "<group>";

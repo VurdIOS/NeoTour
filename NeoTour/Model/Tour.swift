@@ -76,3 +76,14 @@ struct Categories: Hashable {
 }
 
 
+//struct BookTour {
+//    var userInfo: UserInfo
+//    var tourInfo: Tour
+//}
+//
+//struct UserInfo {
+//    var comment: String
+//    var number: String
+//    var amountPeople: Int
+//}
+
