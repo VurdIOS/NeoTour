@@ -18,7 +18,7 @@ class OnboardingViewModel : OnboardinViewModelProtocol {
         tourData.onboardingImage
     }
     
-    private let tourData = TourModel.getTourData()
+    private let tourData = ToursData.getTourData()
     
     func getDataForMainView() -> MainViewModelProtocol {
         MainViewModel(tours: tourData)

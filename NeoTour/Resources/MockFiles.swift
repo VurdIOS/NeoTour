@@ -8,7 +8,7 @@
 import UIKit
 
 class MockFiles {
-    let mock = TourModel.getTourData()
+    let mock = ToursData.getTourData()
 }
         
        

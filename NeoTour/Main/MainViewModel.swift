@@ -46,9 +46,9 @@ class MainViewModel: MainViewModelProtocol {
     }
     
     
-    private let tours: TourModel
+    private let tours: ToursData
     
-    required init(tours: TourModel) {
+    required init(tours: ToursData) {
         self.tours = tours
     }
 }
