@@ -22,7 +22,7 @@ class TourDetailViewModel: TourDetailViewModelProtocol {
     private var tour: Tour
     
     func getDataForTopCell() -> TourDetailsTopTableViewCellViewModelProtocol {
-        TourDetailsTopTableViewCellViewModel(image: tour.image)
+        TourDetailsTopTableViewCellViewModel(image: UIImage())
     }
     
     func getDataForBottomCell() -> TourDetailsBottomCollectionCellViewModelProtocol {

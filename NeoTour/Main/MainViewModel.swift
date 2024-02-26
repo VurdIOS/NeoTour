@@ -45,6 +45,27 @@ class MainViewModel: MainViewModelProtocol {
         TourDetailViewModel(tour: tour)
     }
     
+    lazy var toursss = tours.toursForReccomended
+    
+    func loadImage() {
+        for imageUrl in toursss {
+            NetworkLayer.fetchImage(from: imageUrl.image) { [weak self] result in
+                DispatchQueue.main.async {
+                    switch result {
+                    case .success(let image):
+                        print("sdsdfsdf")
+//                        self?.onDataLoaded?(image)
+                    case .failure(let error):
+                        print(error) // Обработка ошибки
+//                        self?.onDataLoaded?(nil)
+                    }
+                }
+            }
+        }
+        // Предполагаем, что у тебя есть метод для загрузки картинки по URL
+
+    }
+    
     
     private let tours: ToursData
     

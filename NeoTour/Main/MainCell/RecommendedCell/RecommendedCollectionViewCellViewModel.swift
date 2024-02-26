@@ -14,7 +14,8 @@ protocol RecommendedCollectionViewCellViewModelProtocol {
 
 class RecommendedCollectionViewCellViewModel: RecommendedCollectionViewCellViewModelProtocol {
     var image: UIImage {
-        tour.image
+//        tour.image
+        UIImage()
     }
     
     var title: String {

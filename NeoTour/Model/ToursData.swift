@@ -7,14 +7,9 @@
 
 import UIKit
 
-struct ToursData {
-    var onboardingImage: UIImage
+struct ToursData: Codable {
+    var onboardingImage: URL
     var categories: [Categories]
     var toursForGalery: [Tour]
     var toursForReccomended: [Tour]
-    
-    static func getTourData() -> ToursData {
-        return ToursData(onboardingImage: UIImage(named: "testImage")!, categories: Categories.getCategories(), toursForGalery: Tour.getToursForGalery(), toursForReccomended: Tour.getToursForRecommended())
-    }
 }
-

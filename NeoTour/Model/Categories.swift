@@ -7,13 +7,13 @@
 
 import Foundation
 
-struct Categories: Hashable {
+struct Categories: Hashable, Codable {
     var id: Int
     var title: String
     
-    static func getCategories() -> [Categories] {
-        return [Categories(id: 0, title: "Popular"), Categories(id: 1, title: "Featured"), Categories(id: 2, title: "Most visited"), Categories(id: 3, title: "Europe"), Categories(id: 4, title: "Asia")]
-    }
+    enum CodingKeys: String, CodingKey {
+         case id, title
+     }
     
     func hash(into hasher: inout Hasher) {
       hasher.combine(identifier)
@@ -23,5 +23,7 @@ struct Categories: Hashable {
       return lhs.identifier == rhs.identifier
     }
 
-    private let identifier = UUID()
+    private var identifier = UUID()
+    
+    
 }

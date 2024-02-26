@@ -50,7 +50,7 @@ class CommentsView: UIView {
       }
     
     private func configure(with configuration: Comments) {
-        avatarImageView.image = configuration.image
+//        avatarImageView.image = configuration.image
         nameLabel.text = configuration.author
         reviewLabel.attributedText = configuration.content.createLine(spacing: 4)
     }

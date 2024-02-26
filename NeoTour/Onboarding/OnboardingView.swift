@@ -11,7 +11,7 @@ class OnboardingView: UIViewController {
     
     var viewModel: OnboardinViewModelProtocol! {
         didSet {
-            mainImage.image = viewModel.image
+            
         }
     }
     
@@ -72,6 +72,15 @@ class OnboardingView: UIViewController {
         setupConstraints()
         setupTargetAction()
         viewModel = OnboardingViewModel()
+        
+        viewModel.onDataLoaded = { [weak self] image in
+            
+            DispatchQueue.main.async {
+                self?.mainImage.image = image
+            }
+                    
+                }
+        viewModel.loadData()
     }
     
     override func viewDidLayoutSubviews() {

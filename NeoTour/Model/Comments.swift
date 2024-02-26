@@ -7,12 +7,8 @@
 
 import UIKit
 
-struct Comments {
-    var image: UIImage
+struct Comments: Codable {
+    var image: URL
     var author: String
     var content: String
-    
-    static func getComment() -> [Comments] {
-        return [Comments(image: UIImage(named: "userImage")!, author: "Tom", content: "That was such a nice place. The most beautiful place I’ve ever seen. My advice to everyone not to forget to take warm coa"), Comments(image: UIImage(named: "userImage")!, author: "Tom", content: "That was such a nice place. The most beautiful place I’ve ever seen. My advice to everyone not to forget to take warm coa")]
-    }
 }
