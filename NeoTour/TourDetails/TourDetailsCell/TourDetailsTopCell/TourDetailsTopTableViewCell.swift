@@ -12,7 +12,12 @@ class TourDetailsTopCollectionCell: UITableViewCell {
     
     var viewModel: TourDetailsTopTableViewCellViewModelProtocol! {
         didSet {
-            pictureImageView.image = viewModel.image
+            viewModel.isImageLoaded = { imageData in
+                DispatchQueue.main.async {
+                    self.pictureImageView.image = UIImage(data: imageData!)
+                }
+            }
+            viewModel.fetchImage()
         }
     }
     

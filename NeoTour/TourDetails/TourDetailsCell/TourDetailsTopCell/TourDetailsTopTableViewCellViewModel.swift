@@ -5,17 +5,35 @@
 //  Created by Камаль Атавалиев on 23.02.2024.
 //
 
-import UIKit
-#warning("Убрать юайкит и присвоить картинке тип дата")
+import Foundation
+
 protocol TourDetailsTopTableViewCellViewModelProtocol {
-    var image: UIImage { get }
+    var tour: Tour { get }
+    var isImageLoaded: ((Data?) -> Void)? { get set }
+    func fetchImage()
 }
 
 class TourDetailsTopTableViewCellViewModel: TourDetailsTopTableViewCellViewModelProtocol {
-    var image: UIImage
+    var tour: Tour
+    var isImageLoaded: ((Data?) -> Void)?
     
-    required init(image: UIImage) {
-        self.image = image
+    private let network = NetworkLayer.shared
+    
+    func fetchImage() {
+        network.fetchImage(from: tour.image) {[unowned self] result in
+            switch result {
+            case .success(let imageData):
+                self.isImageLoaded?(imageData)
+            case.failure(_):
+                self.isImageLoaded?(nil)
+                
+            }
+        }
+    }
+    
+    
+    required init(tour: Tour) {
+        self.tour = tour
     }
     
     

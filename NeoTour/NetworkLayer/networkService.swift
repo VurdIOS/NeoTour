@@ -44,8 +44,9 @@ final class NetworkLayer {
         }.resume()
     }
     
-    static func fetchImage(from url: URL, completion: @escaping (Result<UIImage, Error>) -> Void) {
-        let task = URLSession.shared.dataTask(with: url) { data, response, error in
+     func fetchImage(from url: String, completion: @escaping (Result<Data, Error>) -> Void) {
+         guard let imageUrl = URL(string: url) else { return }
+        let task = URLSession.shared.dataTask(with: imageUrl) { data, response, error in
             if let error = error {
                 completion(.failure(error))
                 return
@@ -57,13 +58,13 @@ final class NetworkLayer {
                 return
             }
             
-            guard let data = data, let image = UIImage(data: data) else {
+            guard let data = data else {
                 // Можешь заменить на свою ошибку
                 completion(.failure(NSError(domain: "Image data could not be decoded", code: 0, userInfo: nil)))
                 return
             }
             
-            completion(.success(image))
+            completion(.success(data))
         }
         task.resume()
     }

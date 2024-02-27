@@ -16,6 +16,7 @@ class TourCategoriesCollectionViewCellViewModel: TourCategoriesCollectionViewCel
     }
     
     private let categories: Categories
+    
  
     
     required init(categories: Categories) {

@@ -10,7 +10,7 @@ import UIKit
 struct Tour: Hashable, Codable {
     var id: Int
     var title: String
-    var image: URL
+    var image: String
     var location: String
     var description: String
     var comments: [Comments]
@@ -30,3 +30,4 @@ struct Tour: Hashable, Codable {
     private var identifier = UUID()
   
 }
+

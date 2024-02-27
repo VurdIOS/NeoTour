@@ -13,7 +13,14 @@ class GaleryCollectionViewCell: UICollectionViewCell {
     var viewModel: GaleryCollectionViewCellViewModelProtocol! {
         didSet {
             cellLabel.text = viewModel.title
-            cellImage.image = viewModel.image
+            viewModel.isImageLoaded = { [weak self] imageData in
+                
+                DispatchQueue.main.async {
+                    self?.cellImage.image = UIImage(data: imageData!)
+                }
+                        
+                    }
+            viewModel.fetchImage()
         }
     }
 

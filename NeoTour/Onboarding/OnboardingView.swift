@@ -76,7 +76,7 @@ class OnboardingView: UIViewController {
         viewModel.onDataLoaded = { [weak self] image in
             
             DispatchQueue.main.async {
-                self?.mainImage.image = image
+                self?.mainImage.image = UIImage(data: image!)
             }
                     
                 }

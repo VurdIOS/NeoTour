@@ -15,7 +15,14 @@ class RecommendedCollectionViewCell: UICollectionViewCell {
     var viewModel: RecommendedCollectionViewCellViewModelProtocol! {
         didSet {
             cellLabel.text = viewModel.title
-            cellImage.image = viewModel.image
+            viewModel.isImageLoaded = { [weak self] imageData in
+                
+                DispatchQueue.main.async {
+                    self?.cellImage.image = UIImage(data: imageData!)
+                }
+                        
+                    }
+            viewModel.fetchImage()
         }
     }
 
@@ -36,6 +43,7 @@ class RecommendedCollectionViewCell: UICollectionViewCell {
         imageView.translatesAutoresizingMaskIntoConstraints = false
         imageView.backgroundColor = .accentColor
         imageView.clipsToBounds = true
+        imageView.contentMode = .scaleAspectFill
         imageView.layer.cornerRadius = 10
         
         return imageView
@@ -71,17 +79,13 @@ class RecommendedCollectionViewCell: UICollectionViewCell {
             blackoutBackground.leftAnchor.constraint(equalTo: cellImage.leftAnchor),
             blackoutBackground.rightAnchor.constraint(equalTo: cellImage.rightAnchor),
             blackoutBackground.heightAnchor.constraint(equalToConstant: 56)
-            
-            
-            
-            
+           
         ])
         contentView.clipsToBounds = false
         contentView.backgroundColor = .clear
         
         
     }
-    
     
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")

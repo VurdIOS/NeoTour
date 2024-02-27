@@ -6,15 +6,15 @@
 //
 import UIKit
 protocol OnboardinViewModelProtocol {
-    var onDataLoaded: ((UIImage?) -> Void)? { get set }
+    var onDataLoaded: ((Data?) -> Void)? { get set }
     func getDataForMainView() -> MainViewModelProtocol
     func loadData()
-    func loadImage(from: URL)
+    func loadImage(from: String)
 }
 
 class OnboardingViewModel : OnboardinViewModelProtocol {
     
-    var onDataLoaded: ((UIImage?) -> Void)?
+    var onDataLoaded: ((Data?) -> Void)?
     
     private var tourData: ToursData! 
     
@@ -39,9 +39,9 @@ class OnboardingViewModel : OnboardinViewModelProtocol {
         }
     }
     
-    func loadImage(from url: URL) {
+    func loadImage(from url: String) {
         // Предполагаем, что у тебя есть метод для загрузки картинки по URL
-        NetworkLayer.fetchImage(from: url) { [weak self] result in
+        NetworkLayer.shared.fetchImage(from: url) { [weak self] result in
             DispatchQueue.main.async {
                 switch result {
                 case .success(let image):
