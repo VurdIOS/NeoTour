@@ -15,20 +15,22 @@ protocol MainViewModelProtocol {
     func getDataForGaleryCell(tour: Tour) -> GaleryCollectionViewCellViewModelProtocol
     func getDataForRecommendedCell(tour: Tour) -> RecommendedCollectionViewCellViewModelProtocol
     func getDataForDetailView(tour: Tour) -> TourDetailViewModelProtocol
+    func changeCategory(id: Int)
 }
 
 class MainViewModel: MainViewModelProtocol {
-    
     var categories: [Categories] {
         tours.categories
     }
     var toursForGalery: [Tour] {
-        tours.toursForGalery
+            filteredToursForGalery ?? tours.toursForGalery
     }
     
     var toursForRecommended: [Tour] {
         tours.toursForReccomended
     }
+    
+    private var filteredToursForGalery: [Tour]?
     
     func getDataForCategoriesCell(categories: Categories) -> TourCategoriesCollectionViewCellViewModelProtocol {
         TourCategoriesCollectionViewCellViewModel(categories: categories)
@@ -44,6 +46,10 @@ class MainViewModel: MainViewModelProtocol {
     func getDataForDetailView(tour: Tour) -> TourDetailViewModelProtocol {
         TourDetailViewModel(tour: tour)
     }
+    
+    func changeCategory(id: Int) {
+        filteredToursForGalery = tours.toursForGalery.filter { $0.id == id }
+       }
     
     
     private let tours: ToursData

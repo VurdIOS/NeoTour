@@ -86,6 +86,18 @@ class MainView: UIViewController {
       return layout
     }
     
+    private func anotherCategorySelected() {
+        var snapshot = dataSource.snapshot()
+
+        snapshot.deleteItems(snapshot.itemIdentifiers(inSection: .galeryTour))
+
+        let newItemsForFirstSection = viewModel.toursForGalery
+        snapshot.appendItems(newItemsForFirstSection.map { Item.galery($0) }, toSection: .galeryTour)
+
+        dataSource.apply(snapshot, animatingDifferences: true)
+    }
+
+    
     private func generateCarouselLayout(isWide: Bool) -> NSCollectionLayoutSection {
         let itemSize = NSCollectionLayoutSize(
             widthDimension: .fractionalWidth(0.25),
@@ -174,8 +186,8 @@ class MainView: UIViewController {
     private func configureDataSource() {
         dataSource = UICollectionViewDiffableDataSource<Section, Item>(collectionView: MainViewCollectionView, cellProvider: { (collectionView, indexPath, item) -> UICollectionViewCell? in
 
-            let sectionType = Section.allCases[indexPath.section]
-            switch sectionType {
+            
+            switch self.dataSource.snapshot().sectionIdentifiers[indexPath.section] {
             case .carouselTour:
                 guard case let .carousel(data) = item else {
                                 fatalError("Invalid item type for carouselTour section")
@@ -260,11 +272,13 @@ extension MainView: UICollectionViewDelegate {
                 
                 switch section {
                 case .carouselTour:
-                    if case let .carousel(_) = item {
+                    if case let .carousel(category) = item {
                         if let cell = collectionView.cellForItem(at: indexPath) as? TourCategoriesCollectionViewCell {
                             cell.segmentControl.font = UIFont(name: "SFProDisplay-Bold", size: 16)
                             cell.segmentControl.textColor = .accentColor
                             cell.pointUnderSelected.isHidden = false
+                            viewModel.changeCategory(id: category.id )
+                            anotherCategorySelected()
 
                             }
                     }

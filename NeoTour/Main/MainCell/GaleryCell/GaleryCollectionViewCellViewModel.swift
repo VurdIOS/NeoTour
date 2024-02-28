@@ -16,11 +16,6 @@ protocol GaleryCollectionViewCellViewModelProtocol {
 }
 
 class GaleryCollectionViewCellViewModel: GaleryCollectionViewCellViewModelProtocol {
-//    var image: UIImage {
-////        tour.image
-//        UIImage()
-//    }
-    
     var title: String {
         tour.title
     }
