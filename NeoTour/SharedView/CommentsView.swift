@@ -11,6 +11,7 @@ class CommentsView: UIView {
     
       private let avatarImageView: UIImageView = {
           let imageView = UIImageView()
+          imageView.image = UIImage(named: "userImage")
           imageView.contentMode = .scaleAspectFill
           imageView.layer.cornerRadius = 12
           imageView.layer.masksToBounds = true

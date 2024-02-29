@@ -66,7 +66,7 @@ class BookView: UIViewController{
     
     var phoneNumberField: UITextField = {
         let field = UITextField()
-        field.borderStyle = .roundedRect
+        field.borderStyle = .none
         field.keyboardType = .phonePad
         field.text = "+996"
         field.layer.cornerRadius = 25
@@ -315,7 +315,7 @@ extension BookView: UITextFieldDelegate {
     func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
         let currentText = textField.text ?? ""
         let newText = (currentText as NSString).replacingCharacters(in: range, with: string)
-        submitButton.isEnabled = newText.count >= 9 ? true : false
+        submitButton.isEnabled = newText.count >= 12 ? true : false
 
         return true
     }

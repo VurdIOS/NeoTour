@@ -9,11 +9,7 @@ import UIKit
 
 class OnboardingView: UIViewController {
     
-    var viewModel: OnboardinViewModelProtocol! {
-        didSet {
-            
-        }
-    }
+    var viewModel: OnboardinViewModelProtocol
     
     private let mainImage: UIImageView = {
         let imageView = UIImageView()
@@ -53,7 +49,6 @@ class OnboardingView: UIViewController {
         return label
     }()
     
-    //TO DO: Настроить нормально отступ между текстом и стрелкой
     private var goButton: UIButton = {
         let button = UIButton()
         button.setTitle("Let's Go!    ", for: .normal)
@@ -66,19 +61,26 @@ class OnboardingView: UIViewController {
         return button
     }()
     
+    init(viewModel: OnboardinViewModelProtocol) {
+        self.viewModel = viewModel
+        super.init(nibName: nil, bundle: nil)
+        
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .white
         setupConstraints()
         setupTargetAction()
         viewModel = OnboardingViewModel()
-        
         viewModel.onDataLoaded = { [weak self] image in
-            
             DispatchQueue.main.async {
                 self?.mainImage.image = UIImage(data: image!)
             }
-                    
                 }
         viewModel.loadData()
     }
@@ -115,7 +117,6 @@ class OnboardingView: UIViewController {
             goButton.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 16),
             goButton.widthAnchor.constraint(equalToConstant: 177),
             goButton.heightAnchor.constraint(equalToConstant: 53)
-            
         ])
     }
     
