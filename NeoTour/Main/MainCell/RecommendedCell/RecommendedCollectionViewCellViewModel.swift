@@ -20,8 +20,8 @@ class RecommendedCollectionViewCellViewModel: RecommendedCollectionViewCellViewM
     
     var isImageLoaded: ((Data?) -> Void)?
     
-    
     private let tour: Tour
+    
     private let network = NetworkLayer.shared
     
     func fetchImage() {
@@ -31,7 +31,6 @@ class RecommendedCollectionViewCellViewModel: RecommendedCollectionViewCellViewM
                 self.isImageLoaded?(imageData)
             case.failure(_):
                 self.isImageLoaded?(nil)
-                
             }
         }
     }

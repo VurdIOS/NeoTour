@@ -51,7 +51,6 @@ class MainViewModel: MainViewModelProtocol {
         filteredToursForGalery = tours.toursForGalery.filter { $0.id == id }
        }
     
-    
     private let tours: ToursData
     
     required init(tours: ToursData) {

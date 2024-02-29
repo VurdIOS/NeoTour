@@ -26,15 +26,11 @@ class TourDetailsTopTableViewCellViewModel: TourDetailsTopTableViewCellViewModel
                 self.isImageLoaded?(imageData)
             case.failure(_):
                 self.isImageLoaded?(nil)
-                
             }
         }
     }
     
-    
     required init(tour: Tour) {
         self.tour = tour
     }
-    
-    
 }

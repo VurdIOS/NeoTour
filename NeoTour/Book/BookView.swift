@@ -167,20 +167,16 @@ class BookView: UIViewController{
         setupConstraints()
         setupTextField()
         setupTargetsForButtons()
-        
-        
     }
+    
     func setupTextField() {
         phoneNumberField.delegate = self
-        
-        flagButton.setImage(UIImage(named: "KG"), for: .normal) // Замените на ваше изображение флага
-        
-        let leftViewForNumberField = UIView(frame: CGRect(x: 0, y: 0, width: 44, height: 44)) // Установите необходимые размеры
-        let leftViewForCommentsField = UIView(frame: CGRect(x: 0, y: 0, width: 20, height: 44)) // Установите необходимые размеры
+        flagButton.setImage(UIImage(named: "KG"), for: .normal)
+        let leftViewForNumberField = UIView(frame: CGRect(x: 0, y: 0, width: 44, height: 44))
+        let leftViewForCommentsField = UIView(frame: CGRect(x: 0, y: 0, width: 20, height: 44))
         
         leftViewForNumberField.addSubview(flagButton)
         flagButton.frame = leftViewForNumberField.bounds
-        
         
         phoneNumberField.leftView = leftViewForNumberField
         phoneNumberField.leftViewMode = .always
@@ -226,7 +222,6 @@ class BookView: UIViewController{
             phoneNumberTitle.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 20),
             phoneNumberTitle.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -20),
             
-            
             phoneNumberField.topAnchor.constraint(equalTo: phoneNumberTitle.bottomAnchor, constant: 4),
             phoneNumberField.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 20),
             phoneNumberField.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -20),
@@ -259,7 +254,6 @@ class BookView: UIViewController{
             numberLabel.leadingAnchor.constraint(equalTo: plusButton.trailingAnchor, constant: 20),
             numberLabel.widthAnchor.constraint(equalToConstant: 100),
             
-            
             submitButton.topAnchor.constraint(equalTo: numberLabel.bottomAnchor, constant: 50),
             submitButton.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 20),
             submitButton.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -20),
@@ -273,7 +267,6 @@ class BookView: UIViewController{
         minusButton.addTarget(self, action: #selector(minusButtonTapped), for: .touchUpInside)
         submitButton.addTarget(self, action: #selector(submitButtonTapped), for: .touchUpInside)
     }
-
     
     @objc func flagButtonTapped(_ sender: UIButton) {
         
@@ -303,20 +296,15 @@ class BookView: UIViewController{
         dismiss(animated: true) {
             self.onDismiss?()
         }
-        
-        
-        
-
     }
 }
-
 
 extension BookView: UITextFieldDelegate {
     func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
         let currentText = textField.text ?? ""
         let newText = (currentText as NSString).replacingCharacters(in: range, with: string)
         submitButton.isEnabled = newText.count >= 12 ? true : false
-
+        
         return true
     }
 }
@@ -326,14 +314,12 @@ extension BookView: CountryCodePickerDelegate {
         flagButton.setImage(country.flag, for: .normal)
         phoneNumberField.text = country.code
     }
-    
-    
 }
 
 extension BookView: UIPopoverPresentationControllerDelegate  {
     func adaptivePresentationStyle(for controller: UIPresentationController) -> UIModalPresentationStyle {
-          return .none // Это гарантирует, что на iPhone popover не будет растягиваться на весь экран
-      }
+        return .none
+    }
 }
 
 

@@ -21,13 +21,11 @@ class AlertViewController: UIViewController {
     private func setupLayout() {
         view.backgroundColor = UIColor.black.withAlphaComponent(0.5)
         
-        // Настройка контейнера
         containerView.translatesAutoresizingMaskIntoConstraints = false
         containerView.backgroundColor = .white
         containerView.layer.cornerRadius = 20
         view.addSubview(containerView)
         
-        // Настройка текстовой метки
         messageLabel.translatesAutoresizingMaskIntoConstraints = false
         messageLabel.text = "Your trip has been booked!"
         messageLabel.font = UIFont(name: "SFProDisplay-Bold", size: 24)
@@ -35,7 +33,6 @@ class AlertViewController: UIViewController {
         messageLabel.numberOfLines = 0
         containerView.addSubview(messageLabel)
         
-        // Настройка кнопки
         okButton.translatesAutoresizingMaskIntoConstraints = false
         okButton.setTitle("Ok", for: .normal)
         okButton.backgroundColor = .accentColor
@@ -44,7 +41,6 @@ class AlertViewController: UIViewController {
         okButton.addTarget(self, action: #selector(okButtonTapped), for: .touchUpInside)
         containerView.addSubview(okButton)
         
-        // Установка constraints для контейнера
         NSLayoutConstraint.activate([
             containerView.centerYAnchor.constraint(equalTo: view.centerYAnchor),
             containerView.centerXAnchor.constraint(equalTo: view.centerXAnchor),
@@ -53,14 +49,12 @@ class AlertViewController: UIViewController {
             containerView.heightAnchor.constraint(equalToConstant: 190)
         ])
         
-        // Установка constraints для messageLabel
         NSLayoutConstraint.activate([
             messageLabel.topAnchor.constraint(equalTo: containerView.topAnchor, constant: 40),
             messageLabel.leadingAnchor.constraint(equalTo: containerView.leadingAnchor, constant: 20),
             messageLabel.trailingAnchor.constraint(equalTo: containerView.trailingAnchor, constant: -20)
         ])
         
-        // Установка constraints для okButton
         NSLayoutConstraint.activate([
             okButton.topAnchor.constraint(equalTo: messageLabel.bottomAnchor, constant: 32),
             okButton.centerXAnchor.constraint(equalTo: containerView.centerXAnchor),

@@ -24,9 +24,7 @@ class MainView: UIViewController {
         case recommended(Tour)
     }
     
-//    let mock = MockFiles()
-    
-    var viewModel: MainViewModelProtocol!
+    var viewModel: MainViewModelProtocol
     
     private var dataSource: UICollectionViewDiffableDataSource<Section, Item>!
     
@@ -51,7 +49,6 @@ class MainView: UIViewController {
         return collectionView
     }()
     
-
     override func viewDidLoad() {
         super.viewDidLoad()
         MainViewCollectionView.delegate = self
@@ -60,6 +57,16 @@ class MainView: UIViewController {
         configureDataSource()
         setupNavBar()
     }
+    
+    init(viewModel: MainViewModelProtocol) {
+        self.viewModel = viewModel
+        super.init(nibName: nil, bundle: nil)
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+    
     private func setupNavBar() {
         self.navigationItem.hidesBackButton = true
         let titleLabel = UILabel()
@@ -69,51 +76,50 @@ class MainView: UIViewController {
     }
     
     func createLayout() -> UICollectionViewLayout {
-      let layout = UICollectionViewCompositionalLayout { (sectionIndex: Int,                                layoutEnvironment: NSCollectionLayoutEnvironment)
-        -> NSCollectionLayoutSection? in
-        let isWideView = layoutEnvironment.container.effectiveContentSize.width > 500
-        
-        let sectionLayoutKind = Section.allCases[sectionIndex]
-        switch (sectionLayoutKind) {
-        case .carouselTour:
-            return self.generateCarouselLayout(isWide: isWideView)
-        case .galeryTour:
-            return self.generateToursLayout(isWide: isWideView)
-        case .recommendedTour:
-            return self.generateRecommendedTourLayout()
+        let layout = UICollectionViewCompositionalLayout { (sectionIndex: Int,                                layoutEnvironment: NSCollectionLayoutEnvironment)
+            -> NSCollectionLayoutSection? in
+            let isWideView = layoutEnvironment.container.effectiveContentSize.width > 500
+            
+            let sectionLayoutKind = Section.allCases[sectionIndex]
+            switch (sectionLayoutKind) {
+            case .carouselTour:
+                return self.generateCarouselLayout(isWide: isWideView)
+            case .galeryTour:
+                return self.generateToursLayout(isWide: isWideView)
+            case .recommendedTour:
+                return self.generateRecommendedTourLayout()
+            }
         }
-      }
-      return layout
+        return layout
     }
     
     private func anotherCategorySelected() {
         var snapshot = dataSource.snapshot()
-
+        
         snapshot.deleteItems(snapshot.itemIdentifiers(inSection: .galeryTour))
-
+        
         let newItemsForFirstSection = viewModel.toursForGalery
         snapshot.appendItems(newItemsForFirstSection.map { Item.galery($0) }, toSection: .galeryTour)
-
+        
         dataSource.apply(snapshot, animatingDifferences: true)
     }
-
     
     private func generateCarouselLayout(isWide: Bool) -> NSCollectionLayoutSection {
         let itemSize = NSCollectionLayoutSize(
             widthDimension: .fractionalWidth(0.25),
             heightDimension: .fractionalHeight(1))
         let item = NSCollectionLayoutItem(layoutSize: itemSize)
-
+        
         let groupFractionalWidth = isWide ? 0.475 : 0.95
         let groupSize = NSCollectionLayoutSize(
-          widthDimension: .fractionalWidth(CGFloat(groupFractionalWidth)),
-          heightDimension: .absolute(CGFloat(50)))
+            widthDimension: .fractionalWidth(CGFloat(groupFractionalWidth)),
+            heightDimension: .absolute(CGFloat(50)))
         let group = NSCollectionLayoutGroup.horizontal(layoutSize: groupSize, subitems: [item])
         group.contentInsets = NSDirectionalEdgeInsets(
-          top: 5,
-          leading: 5,
-          bottom: 5,
-          trailing: 5)
+            top: 5,
+            leading: 5,
+            bottom: 5,
+            trailing: 5)
         
         let section = NSCollectionLayoutSection(group: group)
         section.orthogonalScrollingBehavior = .continuous
@@ -134,16 +140,15 @@ class MainView: UIViewController {
         let group = NSCollectionLayoutGroup.horizontal(layoutSize: groupSize, subitems: [item])
         
         let headerSize = NSCollectionLayoutSize(
-          widthDimension: .fractionalWidth(1.0),
-          heightDimension: .estimated(44))
+            widthDimension: .fractionalWidth(1.0),
+            heightDimension: .estimated(44))
         let sectionHeader = NSCollectionLayoutBoundarySupplementaryItem(
-          layoutSize: headerSize,
-          elementKind: MainView.sectionHeaderElementKind,
-          alignment: .top)
+            layoutSize: headerSize,
+            elementKind: MainView.sectionHeaderElementKind,
+            alignment: .top)
         
         let section = NSCollectionLayoutSection(group: group)
         section.boundarySupplementaryItems = [sectionHeader]
-        
         
         return section
     }
@@ -169,7 +174,7 @@ class MainView: UIViewController {
         let section = NSCollectionLayoutSection(group: group)
         section.orthogonalScrollingBehavior = .groupPaging
         
-      
+        
         return section
     }
     
@@ -185,13 +190,12 @@ class MainView: UIViewController {
     
     private func configureDataSource() {
         dataSource = UICollectionViewDiffableDataSource<Section, Item>(collectionView: MainViewCollectionView, cellProvider: { (collectionView, indexPath, item) -> UICollectionViewCell? in
-
             
             switch self.dataSource.snapshot().sectionIdentifiers[indexPath.section] {
             case .carouselTour:
                 guard case let .carousel(data) = item else {
-                                fatalError("Invalid item type for carouselTour section")
-                            }
+                    fatalError("Invalid item type for carouselTour section")
+                }
                 guard let cell = collectionView.dequeueReusableCell(
                     withReuseIdentifier: TourCategoriesCollectionViewCell.id,
                     for: indexPath
@@ -202,18 +206,18 @@ class MainView: UIViewController {
                 return cell
             case .galeryTour:
                 guard case let .galery(data) = item else {
-                                fatalError("Invalid item type for carouselTour section")
-                            }
+                    fatalError("Invalid item type for carouselTour section")
+                }
                 let cell = collectionView.dequeueReusableCell(
-                  withReuseIdentifier: GaleryCollectionViewCell.id,
-                  for: indexPath
+                    withReuseIdentifier: GaleryCollectionViewCell.id,
+                    for: indexPath
                 ) as! GaleryCollectionViewCell
                 cell.viewModel = self.viewModel.getDataForGaleryCell(tour: data)
                 return cell
             case .recommendedTour:
                 guard case let .recommended(data) = item else {
-                                fatalError("Invalid item type for carouselTour section")
-                            }
+                    fatalError("Invalid item type for carouselTour section")
+                }
                 let cell = collectionView.dequeueReusableCell(
                     withReuseIdentifier: RecommendedCollectionViewCell.id,
                     for: indexPath
@@ -224,89 +228,82 @@ class MainView: UIViewController {
             
         })
         dataSource.supplementaryViewProvider = { (
-          collectionView: UICollectionView,
-          kind: String,
-          indexPath: IndexPath)
-          -> UICollectionReusableView? in
-          
-          guard let supplementaryView = collectionView.dequeueReusableSupplementaryView(
-            ofKind: kind,
-            withReuseIdentifier: HeaderView.reuseIdentifier,
-            for: indexPath) as? HeaderView else {
-            fatalError("Cannot create header view")
-          }
-          
-          supplementaryView.label.text = "Recommended"
-          return supplementaryView
+            collectionView: UICollectionView,
+            kind: String,
+            indexPath: IndexPath)
+            -> UICollectionReusableView? in
+            
+            guard let supplementaryView = collectionView.dequeueReusableSupplementaryView(
+                ofKind: kind,
+                withReuseIdentifier: HeaderView.reuseIdentifier,
+                for: indexPath) as? HeaderView else {
+                fatalError("Cannot create header view")
+            }
+            
+            supplementaryView.label.text = "Recommended"
+            return supplementaryView
         }
         
-        // Создание снимка
         var snapshot = NSDiffableDataSourceSnapshot<Section, Item>()
-
-        // Добавление секций
         snapshot.appendSections([.carouselTour, .galeryTour, .recommendedTour])
-
-        // Добавление элементов для каждой секции
-        let carouselItems = viewModel.categories // Пример данных для секции "carouselTour"
+        
+        let carouselItems = viewModel.categories
         snapshot.appendItems(carouselItems.map { Item.carousel($0) }, toSection: .carouselTour)
-
+        
         let galeryItems: [Tour] = viewModel.toursForGalery
         snapshot.appendItems(galeryItems.map { Item.galery($0) }, toSection: .galeryTour)
-
+        
         let recommendedItems: [Tour] = viewModel.toursForRecommended
         snapshot.appendItems(recommendedItems.map { Item.recommended($0) }, toSection: .recommendedTour)
-
-        // Применение снимка к источнику данных
+        
         dataSource.apply(snapshot, animatingDifferences: false)
-
+        
     }
-    
-    
 }
 
 
 extension MainView: UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         let section = Section.allCases[indexPath.section]
-                let item = dataSource.itemIdentifier(for: indexPath)
-                
-                switch section {
-                case .carouselTour:
-                    if case let .carousel(category) = item {
-                        if let cell = collectionView.cellForItem(at: indexPath) as? TourCategoriesCollectionViewCell {
-                            cell.segmentControl.font = UIFont(name: "SFProDisplay-Bold", size: 16)
-                            cell.segmentControl.textColor = .accentColor
-                            cell.pointUnderSelected.isHidden = false
-                            viewModel.changeCategory(id: category.id )
-                            anotherCategorySelected()
-
-                            }
-                    }
-                case .galeryTour:
-                    if case let .galery(data) = item {
-                        let vc = TourDetailsView()
-                        vc.viewModel = viewModel.getDataForDetailView(tour: data)
-                        navigationController?.pushViewController(vc, animated: true)
-                    }
-                case .recommendedTour:
-                    if case let .recommended(data) = item {
-                        let vc = TourDetailsView()
-                        vc.viewModel = viewModel.getDataForDetailView(tour: data)
-                        navigationController?.pushViewController(vc, animated: true)
-                    }
+        let item = dataSource.itemIdentifier(for: indexPath)
+        
+        switch section {
+        case .carouselTour:
+            if case let .carousel(category) = item {
+                if let cell = collectionView.cellForItem(at: indexPath) as? TourCategoriesCollectionViewCell {
+                    cell.segmentControl.font = UIFont(name: "SFProDisplay-Bold", size: 16)
+                    cell.segmentControl.textColor = .accentColor
+                    cell.pointUnderSelected.isHidden = false
+                    viewModel.changeCategory(id: category.id )
+                    anotherCategorySelected()
+                    
                 }
+            }
+        case .galeryTour:
+            if case let .galery(data) = item {
+                let vc = TourDetailsView()
+                vc.viewModel = viewModel.getDataForDetailView(tour: data)
+                navigationController?.pushViewController(vc, animated: true)
+            }
+        case .recommendedTour:
+            if case let .recommended(data) = item {
+                let vc = TourDetailsView()
+                vc.viewModel = viewModel.getDataForDetailView(tour: data)
+                navigationController?.pushViewController(vc, animated: true)
+            }
         }
+    }
     
     func collectionView(_ collectionView: UICollectionView, didDeselectItemAt indexPath: IndexPath) {
         if Section.allCases[indexPath.section] == .carouselTour {
             let item = dataSource.itemIdentifier(for: indexPath)
-            if case let .carousel(_) = item {
+            if case .carousel(_) = item {
                 if let cell = collectionView.cellForItem(at: indexPath) as? TourCategoriesCollectionViewCell {
                     cell.segmentControl.font = UIFont(name: "SFProDisplay-Regular", size: 16)
                     cell.segmentControl.textColor = .black
                     cell.pointUnderSelected.isHidden = true
-
-                    }
+                    
+                }
             }
         }
     }

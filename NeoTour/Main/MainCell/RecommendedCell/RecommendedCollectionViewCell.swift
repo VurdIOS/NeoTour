@@ -16,16 +16,14 @@ class RecommendedCollectionViewCell: UICollectionViewCell {
         didSet {
             cellLabel.text = viewModel.title
             viewModel.isImageLoaded = { [weak self] imageData in
-                
                 DispatchQueue.main.async {
                     self?.cellImage.image = UIImage(data: imageData!)
                 }
-                        
-                    }
+            }
             viewModel.fetchImage()
         }
     }
-
+    
     private let cellLabel: UILabel = {
         let lbl = UILabel()
         lbl.backgroundColor = .clear
@@ -57,13 +55,11 @@ class RecommendedCollectionViewCell: UICollectionViewCell {
         return view
     }()
     
-    
     override init(frame: CGRect) {
         super.init(frame: frame)
         contentView.addSubview(cellImage)
         cellImage.addSubview(blackoutBackground)
         cellImage.addSubview(cellLabel)
-        
         
         NSLayoutConstraint.activate([
             cellImage.topAnchor.constraint(equalTo: contentView.topAnchor),
@@ -79,16 +75,12 @@ class RecommendedCollectionViewCell: UICollectionViewCell {
             blackoutBackground.leftAnchor.constraint(equalTo: cellImage.leftAnchor),
             blackoutBackground.rightAnchor.constraint(equalTo: cellImage.rightAnchor),
             blackoutBackground.heightAnchor.constraint(equalToConstant: 56)
-           
         ])
         contentView.clipsToBounds = false
         contentView.backgroundColor = .clear
-        
-        
     }
     
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
-    
 }

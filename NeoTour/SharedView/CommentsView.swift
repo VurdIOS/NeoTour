@@ -51,7 +51,6 @@ class CommentsView: UIView {
       }
     
     private func configure(with configuration: Comments) {
-//        avatarImageView.image = configuration.image
         nameLabel.text = configuration.author
         reviewLabel.attributedText = configuration.content.createLine(spacing: 4)
     }
@@ -61,7 +60,6 @@ class CommentsView: UIView {
           addSubview(nameLabel)
           addSubview(reviewLabel)
           
-          // Ограничения для аватара
           NSLayoutConstraint.activate([
               avatarImageView.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 0),
               avatarImageView.topAnchor.constraint(equalTo: topAnchor, constant: 0),
@@ -69,14 +67,12 @@ class CommentsView: UIView {
               avatarImageView.heightAnchor.constraint(equalToConstant: 24)
           ])
           
-          // Ограничения для имени
           NSLayoutConstraint.activate([
               nameLabel.leadingAnchor.constraint(equalTo: avatarImageView.trailingAnchor, constant: 8),
               nameLabel.centerYAnchor.constraint(equalTo: avatarImageView.centerYAnchor),
               nameLabel.trailingAnchor.constraint(equalTo: trailingAnchor, constant: 0)
           ])
           
-          // Ограничения для текста отзыва
           NSLayoutConstraint.activate([
               reviewLabel.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 0),
               reviewLabel.topAnchor.constraint(equalTo: avatarImageView.bottomAnchor, constant: 12),

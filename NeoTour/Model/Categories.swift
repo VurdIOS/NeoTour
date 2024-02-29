@@ -24,6 +24,4 @@ struct Categories: Hashable, Codable {
     }
 
     private var identifier = UUID()
-    
-    
 }

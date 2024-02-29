@@ -24,7 +24,6 @@ class TourCategoriesCollectionViewCell: UICollectionViewCell {
         btn.textColor = .black
         btn.font = UIFont(name: "SFProDisplay-Regular", size: 16)
         
-        
         return btn
     }()
     
@@ -37,9 +36,7 @@ class TourCategoriesCollectionViewCell: UICollectionViewCell {
         
         return circleView
     }()
-    
-    
-    
+   
     override init(frame: CGRect) {
         super.init(frame: frame)
         contentView.addSubview(segmentControl)
@@ -55,17 +52,11 @@ class TourCategoriesCollectionViewCell: UICollectionViewCell {
             pointUnderSelected.topAnchor.constraint(equalTo: segmentControl.bottomAnchor),
             pointUnderSelected.widthAnchor.constraint(equalToConstant: 7), // Ширина круга
             pointUnderSelected.heightAnchor.constraint(equalToConstant: 7) // Высота круга
-            
         ])
+        
         contentView.clipsToBounds = false
         contentView.backgroundColor = .clear
-        
-        
     }
-    
-//    func get(data: Categories) {
-//        segmentControl.text = data.title
-//    }
     
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")

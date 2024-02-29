@@ -4,11 +4,7 @@
 //
 //  Created by Камаль Атавалиев on 17.02.2024.
 //
-
-
-
-//  вернуть фаундешн
-import UIKit
+import Foundation
 
 protocol TourDetailViewModelProtocol {
     func getDataForTopCell() -> TourDetailsTopTableViewCellViewModelProtocol
@@ -31,7 +27,6 @@ class TourDetailViewModel: TourDetailViewModelProtocol {
     func getDataForBookView() -> BookViewModelProtocol {
         BookViewModel(tour: tour)
     }
-    
     
     required init(tour: Tour) {
         self.tour = tour

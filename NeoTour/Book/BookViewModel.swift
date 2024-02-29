@@ -23,7 +23,7 @@ class BookViewModel: BookViewModelProtocol {
     }
     
     var viewModelDidChange: ((BookViewModelProtocol) -> Void)?
-
+    
     private var tour: Tour!
     
     
@@ -32,7 +32,7 @@ class BookViewModel: BookViewModelProtocol {
             viewModelDidChange?(self)
         }
     }
-
+    
     func plusButtonTapped() {
         if counter != 6 { counter += 1}
     }

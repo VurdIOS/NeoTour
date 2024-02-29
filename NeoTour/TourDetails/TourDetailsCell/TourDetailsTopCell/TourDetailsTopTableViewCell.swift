@@ -28,6 +28,7 @@ class TourDetailsTopCollectionCell: UITableViewCell {
         imageView.translatesAutoresizingMaskIntoConstraints = false
         return imageView
     }()
+    
     private lazy var bottomBorder: UIView = {
         let view = UIView()
         view.translatesAutoresizingMaskIntoConstraints = false
@@ -38,13 +39,10 @@ class TourDetailsTopCollectionCell: UITableViewCell {
         return view
     }()
     
-    
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         contentView.addSubview(pictureImageView)
         contentView.addSubview(bottomBorder)
-        
-        
         
         NSLayoutConstraint.activate([
             pictureImageView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor),

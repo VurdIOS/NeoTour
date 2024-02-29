@@ -8,7 +8,6 @@
 import UIKit
 extension String {
     func createLine(spacing: CGFloat) -> NSMutableAttributedString{
-        // Создайте атрибутированную строку с вашим текстом
         let attributedString = NSMutableAttributedString(string:self)
         let paragraphStyle = NSMutableParagraphStyle()
         paragraphStyle.lineSpacing = spacing

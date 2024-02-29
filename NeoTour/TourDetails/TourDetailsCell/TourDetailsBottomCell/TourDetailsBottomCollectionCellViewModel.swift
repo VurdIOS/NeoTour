@@ -6,7 +6,7 @@
 //
 
 import UIKit
-#warning("Убрать юайкит и присвоить картинке тип дата")
+
 protocol TourDetailsBottomCollectionCellViewModelProtocol {
     var title: String { get }
     var location: String { get }
@@ -32,8 +32,6 @@ class TourDetailsBottomCollectionCellViewModel: TourDetailsBottomCollectionCellV
     }
     
     private let tour: Tour
-
-    
     
     required init(tour: Tour) {
         self.tour = tour

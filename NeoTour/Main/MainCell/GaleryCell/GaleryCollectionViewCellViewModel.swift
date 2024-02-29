@@ -8,11 +8,9 @@
 import Foundation
 
 protocol GaleryCollectionViewCellViewModelProtocol {
-//    var image: UIImage { get }
     var title: String { get }
     var isImageLoaded: ((Data?) -> Void)? { get set }
     func fetchImage()
-    
 }
 
 class GaleryCollectionViewCellViewModel: GaleryCollectionViewCellViewModelProtocol {
@@ -32,10 +30,9 @@ class GaleryCollectionViewCellViewModel: GaleryCollectionViewCellViewModelProtoc
             case .success(let imageData):
                 print(imageData)
                 self.isImageLoaded?(imageData)
-            case.failure(let error):
+            case.failure(_):
                 print("error image fuckin off")
                 self.isImageLoaded?(nil)
-                
             }
         }
     }
@@ -43,7 +40,4 @@ class GaleryCollectionViewCellViewModel: GaleryCollectionViewCellViewModelProtoc
     required init(tour: Tour) {
         self.tour = tour
     }
-    
-    
-    
 }

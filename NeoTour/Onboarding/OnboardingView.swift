@@ -31,7 +31,6 @@ class OnboardingView: UIViewController {
     
     private let subTitleLabel: UILabel = {
         let label = UILabel()
-        // Создайте атрибутированную строку с вашим текстом
         let attributedString = NSMutableAttributedString(string:
         """
         Enjoy your winter vacations with warmth
@@ -57,6 +56,7 @@ class OnboardingView: UIViewController {
         button.titleLabel?.font = UIFont(name: "SFProDisplay-Medium", size: 16)
         button.semanticContentAttribute = .forceRightToLeft
         button.translatesAutoresizingMaskIntoConstraints = false
+        button.isEnabled = false
         
         return button
     }()
@@ -64,7 +64,6 @@ class OnboardingView: UIViewController {
     init(viewModel: OnboardinViewModelProtocol) {
         self.viewModel = viewModel
         super.init(nibName: nil, bundle: nil)
-        
     }
     
     required init?(coder: NSCoder) {
@@ -80,8 +79,9 @@ class OnboardingView: UIViewController {
         viewModel.onDataLoaded = { [weak self] image in
             DispatchQueue.main.async {
                 self?.mainImage.image = UIImage(data: image!)
+                self?.goButton.isEnabled = true
             }
-                }
+        }
         viewModel.loadData()
     }
     
@@ -125,10 +125,8 @@ class OnboardingView: UIViewController {
     }
     
     @objc func goButtonTapped() {
-        let vc = MainView()
-        vc.viewModel = viewModel.getDataForMainView()
+        let vc = MainView(viewModel: viewModel.getDataForMainView())
         navigationController?.pushViewController(vc, animated: true)
-        
     }
 }
 
