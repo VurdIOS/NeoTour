@@ -75,7 +75,6 @@ class OnboardingView: UIViewController {
         view.backgroundColor = .white
         setupConstraints()
         setupTargetAction()
-        viewModel = OnboardingViewModel()
         viewModel.onDataLoaded = { [weak self] image in
             DispatchQueue.main.async {
                 self?.mainImage.image = UIImage(data: image!)

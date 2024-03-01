@@ -41,6 +41,7 @@ class OnboardingViewModel : OnboardinViewModelProtocol {
                 case .success(let image):
                     self?.onDataLoaded?(image)
                 case .failure(_):
+                    print("не загрузили картинку")
                     self?.onDataLoaded?(nil)
                 }
             }
