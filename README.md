@@ -5,7 +5,7 @@
 ---
 
 ### Немного по технологиям.
-- MVVC
+- MVVM
 - UICollectionViewDiffableDataSource
 - UICollectionViewCompositionalLayout
 - URLSession
